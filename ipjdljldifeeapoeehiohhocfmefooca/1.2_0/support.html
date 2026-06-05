@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Support Developer</title>
+    <style>
+        body {
+            width: 320px;
+            padding: 0;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .container {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            background: #f0f2f5;
+        }
+
+        .venmo {
+            color: #008CFF;
+            background: #e6f3ff;
+        }
+
+        .paypal {
+            color: #003087;
+            background: #e6eaf3;
+        }
+
+        .crypto {
+            color: #F7931A;
+            background: #fff4e6;
+        }
+
+        .details {
+            flex: 1;
+        }
+
+        .label {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .value {
+            font-size: 12px;
+            color: #666;
+            word-break: break-all;
+        }
+
+        .back-btn {
+            margin-top: auto;
+            background: transparent;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: 500;
+            color: #555;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #eee;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Support Development</h3>
+
+        <a href="https://venmo.com/u/ivytutor" target="_blank" class="card">
+            <div class="icon venmo">V</div>
+            <div class="details">
+                <div class="label">Venmo</div>
+                <div class="value">@ivytutor</div>
+            </div>
+        </a>
+
+        <a href="https://paypal.me/blakeyoung81" target="_blank" class="card">
+            <div class="icon paypal">P</div>
+            <div class="details">
+                <div class="label">PayPal</div>
+                <div class="value">paypal.me/blakeyoung81</div>
+            </div>
+        </a>
+
+        <div class="card" onclick="copyCrypto()">
+            <div class="icon crypto">₿</div>
+            <div class="details">
+                <div class="label">Crypto (ETH / Polygon)</div>
+                <div class="value">0x8d2425cb2d5561871ba9af149610baeb3348859b</div>
+            </div>
+        </div>
+
+        <button class="back-btn" id="backBtn">Back</button>
+    </div>
+
+    <script>
+        document.getElementById('backBtn').addEventListener('click', () => {
+            window.location.href = 'popup.html';
+        });
+
+        function copyCrypto() {
+            navigator.clipboard.writeText('0x8d2425cb2d5561871ba9af149610baeb3348859b');
+
+            const originalText = document.querySelector('.icon.crypto').innerText;
+            document.querySelector('.icon.crypto').innerText = '✓';
+
+            setTimeout(() => {
+                document.querySelector('.icon.crypto').innerText = originalText;
+            }, 1500);
+        }
+    </script>
+</body>
+
+</html>

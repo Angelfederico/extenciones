@@ -1,0 +1,36 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "icons/icon128.png",
+         "16": "icons/icon16.png",
+         "32": "icons/icon32.png",
+         "48": "icons/icon48.png"
+      },
+      "default_popup": "popup.html"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "content_scripts": [ {
+      "js": [ "content_v2.js" ],
+      "matches": [ "https://gemini.google.com/*" ]
+   } ],
+   "description": "Automates Gemini prompts from a CSV file.",
+   "host_permissions": [ "https://gemini.google.com/*" ],
+   "icons": {
+      "128": "icons/icon128.png",
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo+VthFZS6WL8LuItYjYWCg8W0bkuXgwYX4odiKq86+LpF0e1TMGjelEMWYStGhUjs0nV/QIV53uxS9xDCPy+YpVIjHkHBe533/auzKpOXO/GQR6KhuFpbEjLbzVMRSfy0Z9YNFY3TZOOgo+c2If/4eOmQ+5AU176Bneo5OEorUC5kkhawARLu7HVDqn8egVvs8G+wiPqyXw196dJCiUAPt39sfw5b43KDQvGFEf4WTL2E7eMUeyJPVp+/K/U9Plqir+EC6fCK/UlDyhbxGNET+Oc/tai8U+1wVa3c6RyXDa4VHxvcwCiWAPQ9uGICTMeFB6JAg5uCWUgQY2MP8wInQIDAQAB",
+   "manifest_version": 3,
+   "name": "Gemini Automator",
+   "permissions": [ "activeTab", "storage", "downloads" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.2",
+   "web_accessible_resources": [ {
+      "matches": [ "https://gemini.google.com/*" ],
+      "resources": [ "content.csv" ]
+   } ]
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Gemini Automator</title>
+  <style>
+    body {
+      width: 320px;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      color: #202124;
+    }
+
+    h3 {
+      margin-top: 0;
+      color: #1a73e8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #5f6368;
+      margin-bottom: 20px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    #startBtn {
+      background-color: #1a73e8;
+      color: white;
+    }
+
+    #startBtn:hover {
+      background-color: #1557b0;
+    }
+
+    #startBtn:disabled {
+      background-color: #dadce0;
+      color: #80868b;
+      cursor: default;
+    }
+
+    #stopBtn {
+      background-color: #fce8e6;
+      color: #c5221f;
+      margin-top: 10px;
+    }
+
+    #stopBtn:hover {
+      background-color: #fad2cf;
+    }
+
+    #stopBtn:disabled {
+      background-color: #f1f3f4;
+      color: #bdc1c6;
+      cursor: default;
+    }
+
+    #status {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #5f6368;
+      padding: 8px;
+      background: white;
+      border-radius: 4px;
+      border: 1px solid #dadce0;
+      min-height: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 60px;
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #dadce0;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 13px;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #202124;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>Gemini Automator</h3>
+
+  <label for="prefixInput">Prompt Prefix (Optional):</label>
+  <textarea id="prefixInput"
+    placeholder="e.g., Generate a professional infographic...">Generate an effortful professional quality infographic, diagram of the following information condensed into one square dimension photo with "Logo" in the top left corner: </textarea>
+
+  <p>Click Start to run the sample prompts.</p>
+
+  <div style="margin-bottom: 15px; border-bottom: 1px solid #dadce0; padding-bottom: 15px;">
+    <label>Filename Generation:</label>
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+      <label style="font-weight: normal; font-size: 12px; display: flex; align-items: center;">
+        <input type="radio" name="filenameMode" value="number" checked>
+        Number (Col 1)
+      </label>
+      <label style="font-weight: normal; font-size: 12px; display: flex; align-items: center;">
+        <input type="radio" name="filenameMode" value="name">
+        Name (Col 3)
+      </label>
+      <label style="font-weight: normal; font-size: 12px; display: flex; align-items: center;">
+        <input type="radio" name="filenameMode" value="number_name">
+        Number - Name (Col 1 - Col 3)
+      </label>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 15px; border-bottom: 1px solid #dadce0; padding-bottom: 15px;">
+    <label>Data Source:</label>
+    <button id="importBtn" style="background-color: #1a73e8; color: white;">Import CSV File</button>
+    <input type="file" id="csvFile" accept=".csv" style="display: none;">
+    <button id="loadDefaultBtn" style="background-color: #188038; color: white;">Load Default (content.csv)</button>
+  </div>
+
+  <button id="startBtn">Start Automation</button>
+  <button id="stopBtn" disabled>Stop</button>
+  <button id="supportBtn"
+    style="background-color: #f8f9fa; color: #5f6368; border: 1px solid #dadce0; margin-top: 10px;">Support
+    Developer</button>
+  <div id="status">Ready</div>
+  <div id="preview" style="margin-top: 15px; border-top: 1px solid #dadce0; padding-top: 10px; display: none;">
+    <label>Queue Preview:</label>
+    <div id="previewList" style="font-size: 12px; color: #5f6368; max-height: 150px; overflow-y: auto;"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+
+</html>
