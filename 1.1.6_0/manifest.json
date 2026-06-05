@@ -1,0 +1,34 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "assets/icon128.png",
+         "16": "assets/icon16.png",
+         "32": "assets/icon32.png",
+         "48": "assets/icon48.png"
+      },
+      "default_title": "Open VEO Automation"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "content_scripts": [ {
+      "js": [ "content.js" ],
+      "matches": [ "\u003Call_urls>" ]
+   } ],
+   "description": "100% Free! Auto videos & images on Google Flow (VEO3 ULTRA) via multithreading, auto-prompts, clone Vid/Audio & AI scripts",
+   "icons": {
+      "128": "assets/icon128.png",
+      "16": "assets/icon16.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzhqGGvv60SNjnurzVYp3UmAmKbqRo4cuYeYGTeU5GAQ/ObjI5zYQlkLNhtdfoYMMgq7BcQ/wv6PNhY/Skvu3HY5/Xv/58CIR5wE5J9hesN/3b1JynHJC+FSHEPxsQNv26744rnPyf08fHCTDFqmWrotUil6couHFRj7JbOwlqAotlJPIu8sk2Np6ZIVcTtTnq2MCj8sVgpZmR8GYxGY81UOgpECgQ0wi9OuRfitQCWbld9xaSHcrYMuw6jrGId1+NaB8irkR1ZD3GkvwAh5/W03C4Dwne7YYxxpb3hdZ6qWbxJzhoib1D7DkJC6TNAPVhy/8zkmreF1c3H9iWttsawIDAQAB",
+   "manifest_version": 3,
+   "name": "VEO Automation - Tool on Google Flow (VEO3 - GEMINI ULTRA)",
+   "permissions": [ "sidePanel", "activeTab", "storage", "downloads" ],
+   "side_panel": {
+      "default_path": "popup.html"
+   },
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.1.6"
+}

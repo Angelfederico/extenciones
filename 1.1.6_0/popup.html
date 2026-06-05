@@ -1,0 +1,1766 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="intro-screen" class="intro-screen" role="dialog" aria-modal="true">
+      <div class="intro-card">
+        <div class="intro-visual" aria-hidden="true">
+          <span class="intro-orb intro-orb-a"></span>
+          <span class="intro-orb intro-orb-b"></span>
+          <span class="intro-orb intro-orb-c"></span>
+          <div class="intro-avatar-wrap">
+            <img
+              class="intro-avatar"
+              src="./assets/hehe.jpg"
+              alt="Avatar Le Duy Quan"
+            />
+          </div>
+        </div>
+        <h2>VEO Automation</h2>
+        <p>
+          Mở nhanh quy trình tạo video, ảnh và clone prompt trên Google Flow.
+        </p>
+        <div class="intro-info-block intro-profile-block">
+          <h3>Thông tin cá nhân</h3>
+          <div class="intro-profile-content">
+            <div class="intro-profile-meta">
+              <p class="intro-meta-line">
+                <span class="intro-meta-label">Tác giả</span
+                ><strong>Le Duy Quan</strong>
+              </p>
+              <p class="intro-meta-line">
+                <span class="intro-meta-label">Facebook</span>
+                <a
+                  class="intro-facebook-link"
+                  href="https://www.facebook.com/le.duy.quan.385923/"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Facebook cá nhân</a
+                >
+              </p>
+              <p></p>
+              <p class="intro-meta-line">
+                <span class="intro-meta-label">Zalo</span>
+                <span
+                  class="intro-zalo-text"
+                  data-popup-image="./assets/01130249-95c1-4d61-bc65-a163dc8661a0.jpg"
+                  role="button"
+                  tabindex="0"
+                  >0906793975</span
+                >
+              </p>
+            </div>
+          </div>
+          <p
+            class="intro-support-line"
+            data-popup-image="./assets/b6f18188-37d8-4120-9b81-e93e25833afc.jpg"
+            role="button"
+            tabindex="0"
+          >
+            Nếu extension hữu ích, rất mong bạn ủng hộ để mình có thêm động lực
+            để phát triển thêm ạ -
+            <span class="intro-bank-highlight"
+              >MB Bank: 0906793975 - Le Duy Quan</span
+            >.
+          </p>
+        </div>
+        <div class="intro-info-block">
+          <h3>Phiên bản cập nhật</h3>
+          <ul class="intro-update-list">
+            <li>
+              <strong>v1.1.6:</strong> Update dowload and submit for Image mode
+            </li>
+          </ul>
+        </div>
+        <button id="intro-enter-btn" class="intro-enter-btn">
+          Vào giao diện chính
+        </button>
+      </div>
+      <div
+        id="intro-image-modal"
+        class="intro-image-modal hidden"
+        aria-hidden="true"
+      >
+        <div class="intro-image-modal__backdrop" data-modal-close="true"></div>
+        <div
+          class="intro-image-modal__dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Hình ảnh thông tin"
+        >
+          <button
+            id="intro-image-modal-close"
+            class="intro-image-modal__close"
+            type="button"
+          >
+            ×
+          </button>
+          <img
+            id="intro-image-modal-img"
+            class="intro-image-modal__img"
+            src=""
+            alt="Hình ảnh thông tin"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== NEW COMPACT HEADER ====== -->
+    <header class="main-header">
+      <button
+        class="back-arrow-btn"
+        id="back-to-intro-btn"
+        title="Back to intro"
+      >
+        ◀
+      </button>
+      <div class="header-center">
+        <div class="header-title-row">
+          <span class="header-title">VEO Automation - Google Flow</span>
+          <button class="guide-btn" id="guide-btn-open">✦ Guide</button>
+          <div class="header-lang-wrap">
+            <select class="lang-select header-lang-select">
+              <option value="en" selected>EN</option>
+              <option value="vi">VI</option>
+              <option value="zh">ZH</option>
+              <option value="ko">KO</option>
+              <option value="es">ES</option>
+              <option value="ja">JA</option>
+            </select>
+            <span class="lang-arrow">▼</span>
+          </div>
+        </div>
+        <div class="header-author-row">
+          Author:
+          <a href="https://www.facebook.com/le.duy.quan.385923/" target="_blank"
+            >Le Duy Quan - Có bán tài khoản VEO 3</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- ====== USER GUIDE MODAL ====== -->
+    <div id="user-guide-modal" class="user-guide-modal hidden">
+      <div class="user-guide-backdrop" id="guide-backdrop"></div>
+      <div class="user-guide-dialog">
+        <div class="user-guide-header">
+          <span>📄 User Guide</span>
+          <button class="user-guide-close" id="guide-btn-close">✕</button>
+        </div>
+        <div class="user-guide-body">
+          <div class="guide-step">
+            <span class="guide-check">✅</span>
+            <span
+              ><strong>Bước 1:</strong> Mở tab Google Flow
+              <em>(labs.google/flow)</em></span
+            >
+          </div>
+          <div class="guide-step">
+            <span class="guide-check">✅</span>
+            <span
+              ><strong>Bước 2:</strong> Nhập prompt vào ô
+              <strong>Prompts</strong></span
+            >
+          </div>
+          <div class="guide-step">
+            <span class="guide-check">✅</span>
+            <span
+              ><strong>Bước 3:</strong> Chọn số Output, Folder lưu, Model</span
+            >
+          </div>
+          <div class="guide-step">
+            <span class="guide-check">✅</span>
+            <span
+              ><strong>Bước 4:</strong> Bấm <strong>Run</strong> để chạy tự
+              động</span
+            >
+          </div>
+          <div class="guide-step guide-step-note">
+            <span class="guide-gear">⚙️</span>
+            <span
+              >Vào tab <strong>Setting</strong> để cấu hình Model, chất lượng
+              tải, số lần retry...</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-tabs">
+      <button class="main-tab active" data-target="control-tab">
+        ⎘ Automation
+      </button>
+      <button class="main-tab" data-target="create-prompt-tab">
+        ✨ Tạo kịch bản
+      </button>
+      <button class="main-tab" data-target="clone-video-tab">
+        🎬 Clone video
+      </button>
+      <div class="tab-slider"></div>
+    </div>
+
+    <div id="control-tab" class="tab-content active">
+      <div class="control-top-wrapper">
+        <div class="control-top-left">
+          <div class="action-grid">
+            <button
+              class="action-btn active"
+              data-mode="text-to-video"
+              data-note="Customize motion style, duration &amp; quantity in the Settings tab for more control."
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                ></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <path
+                  d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z"
+                ></path>
+              </svg>
+              Text to Video
+            </button>
+            <button
+              class="action-btn"
+              data-mode="frame-to-video"
+              data-note="Customize motion style, duration &amp; quantity in the Settings tab for more control."
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              Frame to Video
+            </button>
+            <button
+              class="action-btn"
+              data-mode="ingredients-to-video"
+              data-note="Customize motion style, duration &amp; quantity in the Settings tab for more control."
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+              </svg>
+              Ingredients to Video
+            </button>
+            <button
+              class="action-btn"
+              data-mode="text-to-image"
+              data-note="Customize aspect ratio, image model, and quantity in the Settings tab for more control."
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                ></polygon>
+              </svg>
+              Text to Image
+            </button>
+            <button
+              class="action-btn"
+              data-mode="ingredients-to-image"
+              data-note="Customize aspect ratio, image model, and quantity in the Settings tab for more control."
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+              </svg>
+              Ingredients to Image
+            </button>
+          </div>
+
+          <div class="config-grid-area">
+            <!-- text-to-video config -->
+            <div class="mode-config active" data-mode-config="text-to-video">
+              <div class="grid-2">
+                <div class="card">
+                  <label>⚡ Concurrent Prompts</label>
+                  <div class="concurrent-dial-wrap">
+                    <div class="concurrent-numbers" data-concurrent-nums></div>
+                    <canvas
+                      class="concurrent-arc"
+                      width="72"
+                      height="90"
+                    ></canvas>
+                  </div>
+                  <small>Number of prompts to process simultaneously.</small>
+                </div>
+                <div class="card">
+                  <label>🕒 Random Delay</label>
+                  <div class="delay-wrapper">
+                    <div class="delay-inputs-row">
+                      <input
+                        class="delay-input"
+                        type="number"
+                        min="20"
+                        max="120"
+                        value="20"
+                      />
+                      <span class="delay-arrow">⇄</span>
+                      <input
+                        class="delay-input"
+                        type="number"
+                        min="20"
+                        max="120"
+                        value="30"
+                      />
+                    </div>
+                    <div class="slider-wrap">
+                      <div class="slider-track-bg"></div>
+                      <div class="slider-track-fill"></div>
+                      <input
+                        class="dual-range range-min"
+                        type="range"
+                        min="20"
+                        max="120"
+                        value="20"
+                        step="1"
+                      />
+                      <input
+                        class="dual-range range-max"
+                        type="range"
+                        min="20"
+                        max="120"
+                        value="30"
+                        step="1"
+                      />
+                    </div>
+                  </div>
+                  <small
+                    >Random wait time before handling the next prompt.</small
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- frame-to-video config -->
+            <div class="mode-config" data-mode-config="frame-to-video">
+              <div class="grid-2">
+                <div class="card">
+                  <label>⚡ Concurrent Prompts</label>
+                  <div class="concurrent-dial-wrap">
+                    <div class="concurrent-numbers" data-concurrent-nums></div>
+                    <canvas
+                      class="concurrent-arc"
+                      width="72"
+                      height="90"
+                    ></canvas>
+                  </div>
+                  <small>Number of prompts to process simultaneously.</small>
+                </div>
+                <div class="card">
+                  <label>🕒 Random Delay</label>
+                  <div class="delay-wrapper">
+                    <div class="delay-inputs-row">
+                      <input
+                        class="delay-input"
+                        type="number"
+                        min="20"
+                        max="120"
+                        value="20"
+                      />
+                      <span class="delay-arrow">⇄</span>
+                      <input
+                        class="delay-input"
+                        type="number"
+                        min="20"
+                        max="120"
+                        value="30"
+                      />
+                    </div>
+                    <div class="slider-wrap">
+                      <div class="slider-track-bg"></div>
+                      <div class="slider-track-fill"></div>
+                      <input
+                        class="dual-range range-min"
+                        type="range"
+                        min="20"
+                        max="120"
+                        value="20"
+                        step="1"
+                      />
+                      <input
+                        class="dual-range range-max"
+                        type="range"
+                        min="20"
+                        max="120"
+                        value="30"
+                        step="1"
+                      />
+                    </div>
+                  </div>
+                  <small
+                    >Random wait time before handling the next prompt.</small
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- ingredients-to-video config -->
+            <div class="mode-config" data-mode-config="ingredients-to-video">
+              <div class="grid-2">
+                <div class="card">
+                  <label>⚡ Concurrent Prompts</label>
+                  <div class="concurrent-dial-wrap">
+                    <div class="concurrent-numbers" data-concurrent-nums></div>
+                    <canvas
+                      class="concurrent-arc"
+                      width="72"
+                      height="90"
+                    ></canvas>
+                  </div>
+                  <small>Number of prompts to process simultaneously.</small>
+                </div>
+                <div class="card">
+                  <label>🕒 Random Delay</label>
+                  <div class="delay-wrapper">
+                    <div class="delay-inputs-row">
+                      <input
+                        class="delay-input"
+                        type="number"
+                        min="20"
+                        max="120"
+                        value="20"
+                      />
+                      <span class="delay-arrow">⇄</span>
+                      <input
+                        class="delay-input"
+                        type="number"
+                        min="20"
+                        max="120"
+                        value="30"
+                      />
+                    </div>
+                    <div class="slider-wrap">
+                      <div class="slider-track-bg"></div>
+                      <div class="slider-track-fill"></div>
+                      <input
+                        class="dual-range range-min"
+                        type="range"
+                        min="20"
+                        max="120"
+                        value="20"
+                        step="1"
+                      />
+                      <input
+                        class="dual-range range-max"
+                        type="range"
+                        min="20"
+                        max="120"
+                        value="30"
+                        step="1"
+                      />
+                    </div>
+                  </div>
+                  <small
+                    >Random wait time before handling the next prompt.</small
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- text-to-image config -->
+            <div class="mode-config" data-mode-config="text-to-image">
+              <div class="grid-2">
+                <div class="card">
+                  <label>⚡ Concurrent Prompts</label>
+                  <div class="concurrent-dial-wrap concurrent-locked">
+                    <div
+                      class="concurrent-numbers"
+                      data-concurrent-nums
+                      data-concurrent-locked
+                    ></div>
+                    <canvas
+                      class="concurrent-arc"
+                      width="72"
+                      height="90"
+                    ></canvas>
+                  </div>
+                  <small>Locked to 1 for Image modes.</small>
+                </div>
+                <div class="card">
+                  <label>🕒 Random Delay</label>
+                  <div class="delay-wrapper">
+                    <div class="delay-inputs-row">
+                      <input
+                        class="delay-input"
+                        type="number"
+                        min="20"
+                        max="120"
+                        value="20"
+                      />
+                      <span class="delay-arrow">⇄</span>
+                      <input
+                        class="delay-input"
+                        type="number"
+                        min="20"
+                        max="120"
+                        value="30"
+                      />
+                    </div>
+                    <div class="slider-wrap">
+                      <div class="slider-track-bg"></div>
+                      <div class="slider-track-fill"></div>
+                      <input
+                        class="dual-range range-min"
+                        type="range"
+                        min="20"
+                        max="120"
+                        value="20"
+                        step="1"
+                      />
+                      <input
+                        class="dual-range range-max"
+                        type="range"
+                        min="20"
+                        max="120"
+                        value="30"
+                        step="1"
+                      />
+                    </div>
+                  </div>
+                  <small
+                    >Random wait time before handling the next prompt.</small
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- ingredients-to-image config -->
+            <div class="mode-config" data-mode-config="ingredients-to-image">
+              <div class="grid-2">
+                <div class="card">
+                  <label>⚡ Concurrent Prompts</label>
+                  <div class="concurrent-dial-wrap">
+                    <div class="concurrent-numbers" data-concurrent-nums></div>
+                    <canvas
+                      class="concurrent-arc"
+                      width="72"
+                      height="90"
+                    ></canvas>
+                  </div>
+                  <small>Number of prompts to process simultaneously.</small>
+                </div>
+                <div class="card">
+                  <label>🕒 Random Delay</label>
+                  <div class="delay-wrapper">
+                    <div class="delay-inputs-row">
+                      <input
+                        class="delay-input"
+                        type="number"
+                        min="20"
+                        max="120"
+                        value="20"
+                      />
+                      <span class="delay-arrow">⇄</span>
+                      <input
+                        class="delay-input"
+                        type="number"
+                        min="20"
+                        max="120"
+                        value="30"
+                      />
+                    </div>
+                    <div class="slider-wrap">
+                      <div class="slider-track-bg"></div>
+                      <div class="slider-track-fill"></div>
+                      <input
+                        class="dual-range range-min"
+                        type="range"
+                        min="20"
+                        max="120"
+                        value="20"
+                        step="1"
+                      />
+                      <input
+                        class="dual-range range-max"
+                        type="range"
+                        min="20"
+                        max="120"
+                        value="30"
+                        step="1"
+                      />
+                    </div>
+                  </div>
+                  <small
+                    >Random wait time before handling the next prompt.</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="setting-side-btn" data-target="setting-tab">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            width="18"
+            height="18"
+          >
+            <circle cx="12" cy="12" r="3"></circle>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+            ></path>
+          </svg>
+          <span>Setting</span>
+        </button>
+      </div>
+
+      <!-- TEXT TO VIDEO SECTION -->
+      <div id="text-to-video" class="mode-section active">
+        <div class="card prompt-card">
+          <div class="card-header">
+            <label>📄 Prompts</label>
+            <button class="upload-btn">or upload .txt file ↥</button>
+          </div>
+          <textarea
+            rows="6"
+            placeholder="Example:&#10;First long prompt.&#10;It can span multiple lines.&#10;&#10;Second prompt starts after a blank line.&#10;&#10;Third prompt."
+          ></textarea>
+          <small>Separate each prompt with a blank line.</small>
+        </div>
+        <div
+          class="card review-card"
+          style="display: none; margin-bottom: 15px"
+        >
+          <label style="display: flex; align-items: center; gap: 8px"
+            ><svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline></svg
+            >Video Mode per Prompt</label
+          >
+          <div
+            class="review-list"
+            style="
+              margin-top: 10px;
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            "
+          ></div>
+          <small style="margin-top: 10px; display: block"
+            >Choose "8s" for 8-second video or "Concat" to combine with next
+            prompt into 1 video.</small
+          >
+        </div>
+        <!-- OUTPUT DIAL + SAVE -->
+        <div class="grid-output-save">
+          <div class="card output-dial-card">
+            <label>🗎 Outputs per Prompt</label>
+            <div class="output-dial-inner">
+              <div class="output-dial-wrap">
+                <canvas
+                  class="output-dial-canvas"
+                  width="130"
+                  height="130"
+                ></canvas>
+                <div class="output-dial-num">1</div>
+              </div>
+              <div class="output-dial-btns">
+                <div class="dial-btn-row">
+                  <button class="dial-btn output-val-btn" data-val="1">1</button
+                  ><button class="dial-btn output-val-btn" data-val="2">
+                    2
+                  </button>
+                </div>
+                <div class="dial-btn-row">
+                  <button class="dial-btn output-val-btn" data-val="4">4</button
+                  ><button class="dial-btn output-val-btn" data-val="3">
+                    3
+                  </button>
+                </div>
+              </div>
+            </div>
+            <select class="output-dial-select" style="display: none">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+          <div class="save-toggle-col">
+            <div class="card save-folder-card">
+              <label>📁 Save to folder</label>
+              <input
+                type="text"
+                id="save-to-folder-text-to-video"
+                value="veo-folder-1"
+              />
+              <small>Subfolder for downloaded files.</small>
+            </div>
+            <div class="auto-rename-card">
+              <div class="toggle-row-inline">
+                <span class="auto-rename-label">Auto rename</span>
+                <label class="switch"
+                  ><input type="checkbox" checked /><span
+                    class="slider round"
+                  ></span
+                ></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FRAME TO VIDEO SECTION -->
+      <div id="frame-to-video" class="mode-section">
+        <div class="upload-zone">
+          <div class="upload-icon">☁️</div>
+          <p><strong>Click to upload or drag &amp; drop</strong></p>
+          <small>PNG, JPG, GIF up to 10MB each</small>
+        </div>
+        <div class="card card-mb">
+          <label>🖼️ Image Processing Option</label>
+          <select>
+            <option value="first-frame" selected>
+              First frame image for each prompt
+            </option>
+            <option value="first-last-frame">
+              First and last frame images for each prompt
+            </option>
+          </select>
+        </div>
+        <div class="card prompt-card">
+          <div class="card-header">
+            <label>📄 Prompts</label
+            ><button class="upload-btn">or upload .txt file ↥</button>
+          </div>
+          <textarea
+            rows="4"
+            placeholder="Example:&#10;First long prompt.&#10;It can span multiple lines.&#10;&#10;Second prompt starts after a blank line.&#10;&#10;Third prompt."
+          ></textarea>
+          <small
+            >Separate prompts with a blank line. Images will be processed with
+            each prompt based on quantity.</small
+          >
+        </div>
+        <div
+          class="card review-card"
+          style="display: none; margin-bottom: 15px"
+        >
+          <label style="display: flex; align-items: center; gap: 8px"
+            ><svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline></svg
+            >Video Mode per Prompt</label
+          >
+          <div
+            class="review-list"
+            style="
+              margin-top: 10px;
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            "
+          ></div>
+          <small style="margin-top: 10px; display: block"
+            >Choose "8s" for 8-second video or "Concat" to combine with next
+            prompt into 1 video.</small
+          >
+        </div>
+        <div class="grid-output-save">
+          <div class="card output-dial-card">
+            <label>🗎 Outputs per Prompt</label>
+            <div class="output-dial-inner">
+              <div class="output-dial-wrap">
+                <canvas
+                  class="output-dial-canvas"
+                  width="130"
+                  height="130"
+                ></canvas>
+                <div class="output-dial-num">1</div>
+              </div>
+              <div class="output-dial-btns">
+                <div class="dial-btn-row">
+                  <button class="dial-btn output-val-btn" data-val="1">1</button
+                  ><button class="dial-btn output-val-btn" data-val="2">
+                    2
+                  </button>
+                </div>
+                <div class="dial-btn-row">
+                  <button class="dial-btn output-val-btn" data-val="4">4</button
+                  ><button class="dial-btn output-val-btn" data-val="3">
+                    3
+                  </button>
+                </div>
+              </div>
+            </div>
+            <select class="output-dial-select" style="display: none">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+          <div class="save-toggle-col">
+            <div class="card save-folder-card">
+              <label>📁 Save to folder</label>
+              <input
+                type="text"
+                id="save-to-folder-frame-to-video"
+                value="veo-folder-1"
+              />
+              <small>Subfolder for downloaded files.</small>
+            </div>
+            <div class="auto-rename-card">
+              <div class="toggle-row-inline">
+                <span class="auto-rename-label">Auto rename</span>
+                <label class="switch"
+                  ><input type="checkbox" checked /><span
+                    class="slider round"
+                  ></span
+                ></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INGREDIENTS TO VIDEO SECTION -->
+      <div id="ingredients-to-video" class="mode-section">
+        <div class="upload-zone">
+          <div class="upload-icon">☁️</div>
+          <p><strong>Click to upload or drag &amp; drop</strong></p>
+          <small>PNG, JPG, GIF up to 10MB each</small>
+        </div>
+        <div class="card card-mb">
+          <label>🖼️ Max Input Images per Prompt</label>
+          <select>
+            <option value="1">1 image</option>
+            <option value="2">2 images</option>
+            <option value="3" selected>3 images</option>
+          </select>
+        </div>
+        <div class="card prompt-card">
+          <div class="card-header">
+            <label>📄 Prompts</label
+            ><button class="upload-btn">or upload .txt file ↥</button>
+          </div>
+          <textarea
+            rows="4"
+            placeholder="Example:&#10;First long prompt.&#10;It can span multiple lines.&#10;&#10;Second prompt starts after a blank line.&#10;&#10;Third prompt."
+          ></textarea>
+          <small
+            >Separate prompts with a blank line. Images will be processed with
+            each prompt based on quantity.</small
+          >
+        </div>
+        <div class="card feature-toggle-card card-mb">
+          <div class="feature-icon">👤</div>
+          <div class="feature-text">
+            <strong>Auto-add character images</strong
+            ><small
+              >Automatically add images that match character names in prompts
+              (based on filename)</small
+            >
+          </div>
+          <label class="switch"
+            ><input type="checkbox" /><span class="slider round"></span
+          ></label>
+        </div>
+        <div
+          class="card review-card"
+          style="display: none; margin-bottom: 15px"
+        >
+          <label style="display: flex; align-items: center; gap: 8px"
+            ><svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline></svg
+            >Video Mode per Prompt</label
+          >
+          <div
+            class="review-list"
+            style="
+              margin-top: 10px;
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            "
+          ></div>
+          <small style="margin-top: 10px; display: block"
+            >Choose "8s" for 8-second video or "Concat" to combine with next
+            prompt into 1 video.</small
+          >
+        </div>
+        <div class="grid-output-save">
+          <div class="card output-dial-card">
+            <label>🗎 Outputs per Prompt</label>
+            <div class="output-dial-inner">
+              <div class="output-dial-wrap">
+                <canvas
+                  class="output-dial-canvas"
+                  width="130"
+                  height="130"
+                ></canvas>
+                <div class="output-dial-num">1</div>
+              </div>
+              <div class="output-dial-btns">
+                <div class="dial-btn-row">
+                  <button class="dial-btn output-val-btn" data-val="1">1</button
+                  ><button class="dial-btn output-val-btn" data-val="2">
+                    2
+                  </button>
+                </div>
+                <div class="dial-btn-row">
+                  <button class="dial-btn output-val-btn" data-val="4">4</button
+                  ><button class="dial-btn output-val-btn" data-val="3">
+                    3
+                  </button>
+                </div>
+              </div>
+            </div>
+            <select class="output-dial-select" style="display: none">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+          <div class="save-toggle-col">
+            <div class="card save-folder-card">
+              <label>📁 Save to folder</label>
+              <input
+                type="text"
+                id="save-to-folder-ingredients-to-video"
+                value="veo-folder-1"
+              />
+              <small>Subfolder for downloaded files.</small>
+            </div>
+            <div class="auto-rename-card">
+              <div class="toggle-row-inline">
+                <span class="auto-rename-label">Auto rename</span>
+                <label class="switch"
+                  ><input type="checkbox" checked /><span
+                    class="slider round"
+                  ></span
+                ></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEXT TO IMAGE SECTION -->
+      <div id="text-to-image" class="mode-section">
+        <div class="card prompt-card">
+          <div class="card-header">
+            <label>📄 Prompts</label
+            ><button class="upload-btn">or upload .txt file ↥</button>
+          </div>
+          <textarea
+            rows="6"
+            placeholder="Example:&#10;First prompt..."
+          ></textarea>
+          <small>Separate each prompt with a blank line.</small>
+        </div>
+        <div
+          class="card review-card"
+          style="display: none; margin-bottom: 15px"
+        >
+          <label style="display: flex; align-items: center; gap: 8px"
+            ><svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline></svg
+            >Image Mode per Prompt</label
+          >
+          <div
+            class="review-list"
+            style="
+              margin-top: 10px;
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            "
+          ></div>
+          <small style="margin-top: 10px; display: block"
+            >Create new: each prompt uses its own uploaded images. Reuse: uses
+            the last generated image from the previous prompt as input.</small
+          >
+        </div>
+        <div class="grid-output-save">
+          <div class="card output-dial-card output-dial-locked">
+            <label>🗎 Outputs per Prompt</label>
+            <div class="output-dial-inner">
+              <div class="output-dial-wrap">
+                <canvas
+                  class="output-dial-canvas"
+                  width="130"
+                  height="130"
+                ></canvas>
+                <div class="output-dial-num">1</div>
+              </div>
+              <div class="output-dial-btns output-btns-locked">
+                <div class="dial-btn-row">
+                  <button class="dial-btn output-val-btn" data-val="1">1</button
+                  ><button
+                    class="dial-btn output-val-btn"
+                    data-val="2"
+                    disabled
+                  >
+                    2
+                  </button>
+                </div>
+                <div class="dial-btn-row">
+                  <button class="dial-btn output-val-btn" data-val="4" disabled>
+                    4</button
+                  ><button
+                    class="dial-btn output-val-btn"
+                    data-val="3"
+                    disabled
+                  >
+                    3
+                  </button>
+                </div>
+              </div>
+            </div>
+            <select class="output-dial-select" style="display: none" disabled>
+              <option value="1" selected>1</option>
+            </select>
+            <small>Locked to 1 for Image modes.</small>
+          </div>
+          <div class="save-toggle-col">
+            <div class="card save-folder-card">
+              <label>📁 Save to folder</label>
+              <input
+                type="text"
+                id="save-to-folder-text-to-image"
+                value="veo-folder-1"
+              />
+              <small>Subfolder for downloaded files.</small>
+            </div>
+            <div class="auto-rename-card">
+              <div class="toggle-row-inline">
+                <span class="auto-rename-label">Auto rename</span>
+                <label class="switch"
+                  ><input type="checkbox" checked /><span
+                    class="slider round"
+                  ></span
+                ></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INGREDIENTS TO IMAGE SECTION -->
+      <div id="ingredients-to-image" class="mode-section">
+        <div class="upload-zone">
+          <div class="upload-icon">☁️</div>
+          <p><strong>Click to upload or drag &amp; drop</strong></p>
+          <small>PNG, JPG, GIF up to 10MB each</small>
+        </div>
+        <div class="card card-mb">
+          <label>🖼️ Max Input Images per Prompt</label>
+          <select>
+            <option value="1">1 image</option>
+            <option value="2">2 images</option>
+            <option value="3" selected>3 images</option>
+          </select>
+        </div>
+        <div class="card prompt-card">
+          <div class="card-header">
+            <label>📄 Prompts</label
+            ><button class="upload-btn">or upload .txt file ↥</button>
+          </div>
+          <textarea
+            rows="4"
+            placeholder="Example:&#10;First long prompt.&#10;It can span multiple lines.&#10;&#10;Second prompt starts after a blank line.&#10;&#10;Third prompt."
+          ></textarea>
+          <small
+            >Separate prompts with a blank line. Images will be processed with
+            each prompt based on quantity.</small
+          >
+        </div>
+        <div class="card feature-toggle-card card-mb">
+          <div class="feature-icon">👤</div>
+          <div class="feature-text">
+            <strong>Auto-add character images</strong
+            ><small
+              >Automatically add images that match character names in prompts
+              (based on filename)</small
+            >
+          </div>
+          <label class="switch"
+            ><input type="checkbox" /><span class="slider round"></span
+          ></label>
+        </div>
+        <div
+          class="card review-card"
+          style="display: none; margin-bottom: 15px"
+        >
+          <label style="display: flex; align-items: center; gap: 8px"
+            ><svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline></svg
+            >Image Mode per Prompt</label
+          >
+          <div
+            class="review-list"
+            style="
+              margin-top: 10px;
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            "
+          ></div>
+          <small style="margin-top: 10px; display: block"
+            >Create new: each prompt uses its own uploaded images. Reuse: uses
+            the last generated image as input.</small
+          >
+        </div>
+        <div class="grid-output-save">
+          <div class="card output-dial-card">
+            <label>🗎 Outputs per Prompt</label>
+            <div class="output-dial-inner">
+              <div class="output-dial-wrap">
+                <canvas
+                  class="output-dial-canvas"
+                  width="130"
+                  height="130"
+                ></canvas>
+                <div class="output-dial-num">1</div>
+              </div>
+              <div class="output-dial-btns">
+                <div class="dial-btn-row">
+                  <button class="dial-btn output-val-btn" data-val="1">1</button
+                  ><button class="dial-btn output-val-btn" data-val="2">
+                    2
+                  </button>
+                </div>
+                <div class="dial-btn-row">
+                  <button class="dial-btn output-val-btn" data-val="4">4</button
+                  ><button class="dial-btn output-val-btn" data-val="3">
+                    3
+                  </button>
+                </div>
+              </div>
+            </div>
+            <select class="output-dial-select" style="display: none">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+          <div class="save-toggle-col">
+            <div class="card save-folder-card">
+              <label>📁 Save to folder</label>
+              <input
+                type="text"
+                id="save-to-folder-ingredients-to-image"
+                value="veo-folder-1"
+              />
+              <small>Subfolder for downloaded files.</small>
+            </div>
+            <div class="auto-rename-card">
+              <div class="toggle-row-inline">
+                <span class="auto-rename-label">Auto rename</span>
+                <label class="switch"
+                  ><input type="checkbox" checked /><span
+                    class="slider round"
+                  ></span
+                ></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-text" id="dynamic-note">
+        Customize motion style, duration &amp; quantity in the Settings tab for
+        more control.
+      </div>
+
+      <!-- OLD toggle-row hidden (logic reads from auto-rename-card now via popup.js) -->
+      <div class="toggle-row" style="display: none">
+        <span>Auto change file name</span>
+        <label class="switch"
+          ><input type="checkbox" checked /><span class="slider round"></span
+        ></label>
+      </div>
+
+      <div class="card queue-card">
+        <div class="queue-header">
+          <span>☷ PROMPT QUEUE</span><span class="active-count">0 active</span>
+        </div>
+        <div class="queue-body"></div>
+        <div class="queue-footer">
+          <button class="btn-clear">↻ Clear</button>
+          <button class="btn-run">▷ Run</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTING TAB -->
+    <div id="setting-tab" class="tab-content">
+      <!-- <div class="card card-mb">
+        <label>🎚️ Default Mode</label
+        ><select id="default-mode-select">
+          <option value="text-to-video" selected>Text to Video</option>
+          <option value="frame-to-video">Frame to Video</option>
+          <option value="ingredients-to-video">Ingredients to Video</option>
+          <option value="text-to-image">Text to Image</option>
+          <option value="ingredients-to-image">
+            Ingredients to Image
+          </option></select
+        ><small>Default mode when creating new videos.</small>
+      </div> -->
+      <div class="grid-2">
+        <div class="card">
+          <label>⚙️ Video Model</label>
+          <select>
+            <option value="veo-3.1-lite">Veo 3.1 - Lite</option>
+            <option value="veo-3.1-fast" selected>Veo 3.1 - Fast</option>
+            <option value="veo-3.1-quality">Veo 3.1 - Quality</option>
+            <option value="veo-3.1-lite-lower">
+              Veo 3.1 - Lite [Lower Priority]
+            </option>
+            <option value="veo-3.1-fast-lower">
+              Veo 3.1 - Fast [Lower Priority]
+            </option>
+          </select>
+          <small>Select the video generation model to use.</small>
+        </div>
+
+        <div class="card">
+          <label>🖼️ Default Aspect Ratio</label>
+          <select>
+            <option value="16:9" selected>16:9 (YouTube)</option>
+            <option value="9:16">9:16 (Shorts/Reels)</option>
+          </select>
+          <small>Video frame ratio (16:9 or 9:16).</small>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <label>🍌 Image Model</label>
+          <select>
+            <option value="nano-banana-2" selected>Nano Banana 2</option>
+            <option value="nano-banana-pro">Nano Banana Pro</option>
+            <option value="imagen-4">Imagen 4</option>
+          </select>
+          <small>Select the AI model for images.</small>
+        </div>
+
+        <div class="card">
+          <label>🖼️ Image Aspect Ratio</label>
+          <select>
+            <option value="16:9" selected>16:9 (Ngang)</option>
+            <option value="4:3">4:3</option>
+            <option value="1:1">1:1 (Vuông)</option>
+            <option value="3:4">3:4</option>
+            <option value="9:16">9:16 (Dọc)</option>
+          </select>
+          <small>Image frame ratio options.</small>
+        </div>
+      </div>
+      <div class="card card-mb">
+        <label>↺ Max Retries on Failure</label>
+        <div class="number-input-group">
+          <button class="btn-minus">−</button
+          ><input
+            type="number"
+            id="max-retries"
+            value="5"
+            min="1"
+            max="20"
+          /><button class="btn-plus">+</button>
+        </div>
+        <small
+          >Number of times to retry video generation if it fails (1-20).</small
+        >
+      </div>
+      <div class="card card-mb">
+        <label>📥 Auto Download Quality (Video)</label
+        ><select id="auto-download-video-quality">
+          <option value="none">No Download</option>
+          <option value="270p">270p</option>
+          <option value="720p" selected>720p</option>
+          <option value="1080p">1080p (Ultra/Pro plan required)</option>
+          <option value="4k">4K (Ultra/Pro plan required)</option></select
+        ><small>Select the video quality for automatic downloads.</small>
+      </div>
+      <div class="card card-mb">
+        <label>📥 Auto Download Quality (Image)</label
+        ><select id="auto-download-image-quality">
+          <option value="none">No Download</option>
+          <option value="1k" selected>1k</option>
+          <option value="2k">2k</option>
+          <option value="4k">4k (Ultra plan required)</option></select
+        ><small>Select the image quality for automatic downloads.</small>
+      </div>
+      <div class="card card-mb">
+        <label>A文 Language</label
+        ><select class="lang-select">
+          <option value="en" selected>English</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="zh">中文</option>
+          <option value="ko">한국어</option>
+          <option value="es">Español</option>
+          <option value="ja">日本語</option></select
+        ><small>Select your preferred language</small>
+      </div>
+      <div class="card card-mb download-settings-box">
+        <div class="ds-text">
+          <strong>📥 Download Settings</strong
+          ><small
+            >Videos are downloaded to Chrome's Download folder. Each project
+            will have its own folder to store videos.</small
+          >
+        </div>
+        <button class="icon-btn">⚙️</button>
+      </div>
+      <div class="setting-actions">
+        <button class="btn-reset">↻ Reset Defaults</button
+        ><button class="btn-save">✓ Save Settings</button>
+      </div>
+      <div class="setting-info">
+        ⓘ Settings are automatically synced across all browser tabs.
+      </div>
+    </div>
+
+    <!-- CREATE PROMPT TAB -->
+    <div id="create-prompt-tab" class="tab-content">
+      <div class="cp-feature-grid">
+        <button class="cp-feature-btn active" data-cp-feature="cp-feature-main">
+          ✨ Tạo kịch bản từ đầu
+        </button>
+        <button class="cp-feature-btn" data-cp-feature="cp-feature-idea">
+          🧩 Tạo kịch bản từ dữ kiện
+        </button>
+      </div>
+      <div id="cp-feature-main" class="cp-feature-section active">
+        <div class="card card-mb">
+          <label>🎯 Mục tiêu &amp; Chủ đề</label>
+          <div class="cp-goal-topic-row" style="margin-top: 10px">
+            <div>
+              <label for="cp-goal">Mục tiêu</label
+              ><input
+                id="cp-goal"
+                type="text"
+                list="cp-goal-list"
+                placeholder="..."
+              /><datalist id="cp-goal-list">
+                <option value="Bán hàng"></option>
+                <option value="Chia sẻ kiến thức"></option>
+                <option value="Giải trí/Hài hước"></option>
+                <option value="Truyền cảm hứng"></option>
+                <option value="Review sản phẩm"></option>
+              </datalist>
+            </div>
+            <div>
+              <label for="cp-main-topic">Chủ đề chính</label
+              ><input
+                id="cp-main-topic"
+                type="text"
+                value=""
+                placeholder="Cách học 500 từ vựng TOEIC trong 1 tuần"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="card card-mb">
+          <label>🎼 Giai điệu câu chuyện &amp; Ngôn ngữ</label>
+          <div class="cp-language-tone-row" style="margin-top: 10px">
+            <div>
+              <label for="cp-language">Ngôn ngữ</label
+              ><input
+                id="cp-language"
+                type="text"
+                list="cp-language-list"
+                placeholder="Tiếng việt"
+              /><datalist id="cp-language-list">
+                <option value="Tiếng Việt"></option>
+                <option value="Tiếng Anh"></option>
+                <option value="Song ngữ"></option>
+              </datalist>
+            </div>
+            <div>
+              <label for="cp-tone">Giai điệu câu chuyện</label
+              ><input
+                id="cp-tone"
+                type="text"
+                list="cp-tone-list"
+                placeholder="Ví dụ: Kịch tính, Hào hứng"
+              /><datalist id="cp-tone-list">
+                <option value="Kịch tính"></option>
+                <option value="Nhanh, dồn dập"></option>
+                <option value="Nhẹ nhàng"></option>
+                <option value="Hài hước"></option>
+                <option value="Truyền cảm hứng"></option>
+              </datalist>
+            </div>
+          </div>
+        </div>
+        <div class="card card-mb">
+          <label>🧱 Cấu trúc kịch bản</label>
+          <div class="grid-2 cp-hook-duration-row" style="margin-top: 10px">
+            <div>
+              <label for="cp-duration">Thời gian</label
+              ><input
+                id="cp-duration"
+                type="text"
+                list="cp-duration-list"
+                placeholder="1 phút"
+              /><datalist id="cp-duration-list">
+                <option value="15s"></option>
+                <option value="60s"></option>
+                <option value="3 phút"></option>
+                <option value="10 phút"></option>
+              </datalist>
+            </div>
+            <div>
+              <label for="cp-hook">Câu mở đầu</label
+              ><input
+                id="cp-hook"
+                type="text"
+                list="cp-hook-list"
+                placeholder="XIn chào các bạn mình là Le Duy Quan"
+              /><datalist id="cp-hook-list">
+                <option value="Đặt một câu hỏi gây sốc"></option>
+                <option value="Đưa ra một con số thống kê"></option>
+                <option value="Cảnh báo sai lầm"></option>
+                <option value='Hiệu ứng "Trước và Sau"'></option>
+              </datalist>
+            </div>
+          </div>
+          <label for="cp-cta">Lời kêu gọi (CTA)</label
+          ><input
+            id="cp-cta"
+            type="text"
+            value=""
+            placeholder="Các bạn hãy like kênh của mình nhé"
+          />
+        </div>
+        <div class="card card-mb">
+          <label>🛠️ Chỉ dẫn kỹ thuật</label>
+          <label for="cp-image-style">Phong cách video</label
+          ><input
+            id="cp-image-style"
+            type="text"
+            list="cp-image-style-list"
+            placeholder="..."
+          /><datalist id="cp-image-style-list">
+            <option value="Chân thực (Hyper-realistic)"></option>
+            <option value="Điện ảnh (Cinematic)"></option>
+            <option value="Chụp ảnh phong cảnh (Landscape)"></option>
+            <option value="POV/Selfie"></option>
+            <option value="Anime/Hoạt hình Nhật Bản"></option>
+            <option value="3D Animation"></option>
+            <option value="Stop-motion/Lego"></option>
+            <option value="Lo-fi Animation"></option>
+            <option value="Vintage/Retro Film"></option>
+            <option value="Sci-fi/Surreal"></option>
+            <option value="ASMR/Relaxing Loop"></option>
+            <option value="Product Mockups"></option>
+          </datalist>
+          <label for="cp-setting">Bối cảnh câu chuyện</label
+          ><input
+            id="cp-setting"
+            type="text"
+            value=""
+            placeholder="Ví dụ: khung cảnh sa mạc của 2 triệu năm trước"
+          />
+          <label for="cp-character-count">Số lượng nhân vật</label
+          ><select id="cp-character-count">
+            <option value="1" selected>1 nhân vật</option>
+            <option value="2">2 nhân vật</option>
+            <option value="3">3 nhân vật</option>
+            <option value="4">4 nhân vật</option>
+            <option value="5">5 nhân vật</option>
+            <option value="6">6 nhân vật</option>
+          </select>
+          <label>Tên nhân vật</label>
+          <div
+            id="cp-character-names"
+            class="grid-2"
+            style="margin-bottom: 0"
+          ></div>
+        </div>
+        <div class="card card-mb">
+          <div style="margin-top: 0; display: flex; justify-content: flex-end">
+            <button class="btn-run" id="cp-generate-gemini-btn">
+              ✨ Generate Prompt
+            </button>
+          </div>
+          <textarea id="cp-output" style="display: none"></textarea>
+          <label for="cp-preview" style="margin-top: 10px"
+            >Preview kết quả Gemini</label
+          >
+          <textarea
+            id="cp-preview"
+            rows="9"
+            placeholder="Khi Gemini generate xong, dữ liệu sẽ tự hiện ở đây..."
+          ></textarea>
+          <small>Mỗi ô là dạng vừa nhập vừa chọn gợi ý từ danh sách.</small>
+        </div>
+      </div>
+      <div id="cp-feature-idea" class="cp-feature-section">
+        <div class="card card-mb">
+          <label>💡Nhập dữ kiện có sẵn của bạn</label>
+          <textarea
+            id="cp-idea-input"
+            rows="5"
+            placeholder="Ví dụ: tôi muốn tạo video (kịch bản) cuộc chạy đua của chó mèo"
+          ></textarea>
+          <div class="grid-2 cp-idea-options-row">
+            <div>
+              <label for="cp-idea-duration">Thời gian video</label
+              ><input
+                id="cp-idea-duration"
+                type="text"
+                list="cp-idea-duration-list"
+                placeholder="Ví dụ: 32s, 40s, 64s..."
+              /><datalist id="cp-idea-duration-list">
+                <option value="16s"></option>
+                <option value="24s"></option>
+                <option value="32s"></option>
+                <option value="40s"></option>
+                <option value="64s"></option>
+                <option value="1 phút"></option>
+                <option value="2 phút"></option>
+              </datalist>
+            </div>
+            <div>
+              <label for="cp-idea-style">Phong cách video</label
+              ><input
+                id="cp-idea-style"
+                type="text"
+                list="cp-idea-style-list"
+                placeholder="Ví dụ: cinematic, hoạt hình, vui nhộn..."
+              /><datalist id="cp-idea-style-list">
+                <option value="Cinematic"></option>
+                <option value="Hyper-realistic"></option>
+                <option value="3D Animation"></option>
+                <option value="Anime"></option>
+                <option value="Hoạt hình vui nhộn"></option>
+                <option value="POV/Selfie"></option>
+                <option value="Vintage/Retro"></option>
+              </datalist>
+            </div>
+          </div>
+          <div class="cp-idea-actions">
+            <button class="btn-run" id="cp-idea-generate-btn">
+              ▷ Generate Prompt
+            </button>
+          </div>
+          <label for="cp-preview-idea" style="margin-top: 10px"
+            >👁️ Preview kết quả Gemini</label
+          >
+          <textarea
+            id="cp-preview-idea"
+            rows="9"
+            placeholder="Khi Gemini generate xong, dữ liệu sẽ tự hiện ở đây..."
+          ></textarea>
+          <small
+            >Gemini sẽ sáng tạo nội dung và trả về JSON scene 8 giây/scene theo
+            schema.</small
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- CLONE VIDEO TAB -->
+    <div id="clone-video-tab" class="tab-content">
+      <div class="cv-feature-grid">
+        <button
+          class="cv-feature-btn active"
+          data-cv-feature="cv-audio-section"
+        >
+          🎵 Clone từ audio
+        </button>
+        <button class="cv-feature-btn" data-cv-feature="cv-video-section">
+          🎞️ Clone từ video
+        </button>
+      </div>
+      <div id="cv-audio-section" class="cv-feature-section active">
+        <div class="card card-mb cv-audio-box">
+          <label for="cv-audio-file">Nguồn audio (upload hoặc kéo-thả)</label>
+          <div
+            id="cv-audio-upload-zone"
+            class="cv-upload-zone"
+            role="button"
+            tabindex="0"
+          >
+            <p>Kéo file audio vào đây hoặc bấm để tải lên</p>
+            <small>Hỗ trợ: .mp3, .wav, .m4a, .ogg</small>
+          </div>
+          <input id="cv-audio-file" type="file" accept="audio/*" hidden />
+          <div id="cv-audio-file-name" class="cv-upload-file-name">
+            Chưa có file audio nào được chọn
+          </div>
+        </div>
+        <div class="card card-mb cv-audio-box">
+          <label for="cv-audio-note">Yêu cầu thay đổi (tuỳ chọn)</label
+          ><input
+            id="cv-audio-note"
+            type="text"
+            placeholder="Ví dụ: giữ bố cục nhưng đổi nhân vật/ánh sáng"
+          />
+        </div>
+        <div class="cv-actions">
+          <button
+            class="btn-run"
+            id="cv-run-audio-btn"
+            style="margin-bottom: 15px"
+          >
+            ▷ Bắt đầu clone từ audio
+          </button>
+        </div>
+        <div class="card card-mb cv-audio-box">
+          <label for="cv-audio-prompt-preview">Preview prompt từ audio</label
+          ><textarea
+            id="cv-audio-prompt-preview"
+            rows="5"
+            placeholder="Sau khi upload audio, prompt preview sẽ hiện ở đây..."
+            readonly
+          ></textarea>
+        </div>
+      </div>
+      <div id="cv-video-section" class="cv-feature-section">
+        <div class="card card-mb cv-video-box">
+          <label for="cv-video-file">Nguồn video (upload hoặc kéo-thả)</label>
+          <div
+            id="cv-video-upload-zone"
+            class="cv-upload-zone"
+            role="button"
+            tabindex="0"
+          >
+            <p>Kéo file video vào đây hoặc bấm để tải lên</p>
+            <small>Hỗ trợ MP4, MOV, WEBM...</small>
+          </div>
+          <input id="cv-video-file" type="file" accept="video/*" hidden />
+          <div id="cv-video-file-name" class="cv-upload-file-name">
+            Chưa có file video nào được chọn
+          </div>
+        </div>
+        <div class="card card-mb cv-video-box">
+          <label for="cv-video-note">Yêu cầu thay đổi (tuỳ chọn)</label
+          ><input
+            id="cv-video-note"
+            type="text"
+            placeholder="Ví dụ: giữ bố cục nhưng đổi nhân vật/ánh sáng"
+          />
+        </div>
+        <div class="cv-actions">
+          <button
+            class="btn-run"
+            id="cv-run-video-btn"
+            style="margin-bottom: 15px"
+          >
+            ▷ Bắt đầu clone từ video
+          </button>
+        </div>
+        <div class="card card-mb cv-video-box">
+          <label for="cv-video-prompt-preview" style="margin-top: 10px"
+            >Preview prompt từ video</label
+          ><textarea
+            id="cv-video-prompt-preview"
+            rows="5"
+            placeholder="Sau khi upload video, prompt preview sẽ hiện ở đây..."
+            readonly
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <a
+      href="https://zalo.me/0906793975"
+      target="_blank"
+      class="zalo-floating-btn"
+      title="Nhắn tin Zalo hỗ trợ"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path
+          d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+        ></path>
+      </svg>
+    </a>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
