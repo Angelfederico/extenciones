@@ -1,0 +1,42 @@
+{
+   "action": {
+      "default_title": "Meta Automation - Auto Meta on Meta.ai"
+   },
+   "author": {
+      "email": "kylenguyenaws@gmail.com"
+   },
+   "background": {
+      "service_worker": "service-worker-loader.js",
+      "type": "module"
+   },
+   "content_scripts": [ {
+      "all_frames": false,
+      "js": [ "assets/index.ts-DAZ_fvVi.js" ],
+      "matches": [ "*://meta.ai/*", "*://www.meta.ai/*" ],
+      "run_at": "document_end"
+   } ],
+   "description": "Auto Meta your prompts at scale. Batch generate and auto-download videos and images on meta.ai.",
+   "host_permissions": [ "*://meta.ai/*", "*://*.meta.ai/*" ],
+   "icons": {
+      "128": "src/assets/logo.png",
+      "16": "src/assets/logo.png",
+      "24": "src/assets/logo.png",
+      "32": "src/assets/logo.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA72Jv+F7Btc5/epILXga5bqGdgi4CIlPfsZLE1v0aKtsN9sWHGXA3B2Odxfc4kX9+543JZ5bYOPru4RuVa6RApItTiQyKS/cNVhScSimz6rp8ZJ3N6lPGmzreeYZhMZLyJklOd2CDHOn+sfyLIO2C2WEXsGUAGQvoQWuJBUfs+PTM0JhZlmS4ncA7M0nf7lpdKT/OSZ8wZ+iLu2vCD4wpBIpvL2S1ecsTARYH7W8TUmiPNyfxik55Xn7wc0Mfu3tvABioO2vlLnZ23Gr5tKcHM6naDeKoFfV/zKT/zVed7UAIAUi00VeJ7aiDXlHK5cH8OTK0Ncq/YBj50O0jUeLolwIDAQAB",
+   "manifest_version": 3,
+   "name": "Meta Automation - Auto Meta on Meta.ai",
+   "offline_enabled": true,
+   "permissions": [ "storage", "tabs", "background", "sidePanel", "activeTab", "downloads" ],
+   "side_panel": {
+      "default_path": "src/ui/side-panel/index.html"
+   },
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.0.9.0",
+   "version_name": "2.0.9",
+   "web_accessible_resources": [ {
+      "matches": [ "*://meta.ai/*", "*://www.meta.ai/*" ],
+      "resources": [ "assets/index.ts-DAZ_fvVi.js" ],
+      "use_dynamic_url": false
+   } ]
+}
