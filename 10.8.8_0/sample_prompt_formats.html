@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auto Flow Format Guide</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172026;
+      --muted: #5f6b7a;
+      --line: #d9e0e8;
+      --panel: #ffffff;
+      --soft: #f5f7fa;
+      --accent: #2656d9;
+      --accent-soft: #eaf0ff;
+      --ok: #087443;
+      --warn: #8a5a00;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      margin: 0;
+      background: var(--soft);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    header {
+      background: #101827;
+      color: #fff;
+      padding: 28px clamp(18px, 4vw, 44px);
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    header p {
+      max-width: 900px;
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 15px;
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px clamp(14px, 3vw, 28px) 40px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 0 0 16px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 18px 0 8px;
+      font-size: 15px;
+    }
+    p {
+      margin: 0 0 10px;
+      color: var(--muted);
+    }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+    }
+    code {
+      background: var(--accent-soft);
+      color: #173f9f;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+    pre {
+      margin: 10px 0 0;
+      padding: 12px;
+      background: #0d1117;
+      color: #e6edf3;
+      border-radius: 7px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+    ul, ol {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 13px;
+      background: #fbfcfe;
+    }
+    .card strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 8px;
+      margin: 3px 4px 3px 0;
+      background: #fff;
+      color: #314155;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .syntax {
+      border-left: 4px solid var(--accent);
+      background: #f8faff;
+      padding: 12px 14px;
+      margin: 12px 0;
+    }
+    .warning {
+      border-left: 4px solid var(--warn);
+      background: #fff9ea;
+      padding: 12px 14px;
+      margin: 12px 0;
+    }
+    .ok {
+      border-left: 4px solid var(--ok);
+      background: #f0fdf4;
+      padding: 12px 14px;
+      margin: 12px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+      padding: 9px;
+    }
+    th {
+      background: #f0f3f7;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Auto Flow Format Guide</h1>
+    <p>Use structural tokens so Auto Flow can split prompts, map references, and keep character handles stable. Descriptions can be written in any language; the separators and handles stay the same.</p>
+  </header>
+  <main>
+    <section>
+      <h2>Token Cheat Sheet</h2>
+      <div class="grid">
+        <div class="card"><strong>Scene tag</strong><code>[V1-S1]</code><p>Optional, but useful for ordering and matching.</p></div>
+        <div class="card"><strong>Frame split</strong><code>image prompt ||| video prompt</code><p>Left side creates the image. Right side animates it.</p></div>
+        <div class="card"><strong>Character handle</strong><code>@gary_before</code><p>ASCII handle, no spaces. Use underscores for display names with spaces.</p></div>
+        <div class="card"><strong>Character fields</strong><code>||| voice: none ||| info: notes</code><p>Optional fields after the character description.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Regular Prompts</h2>
+      <p>Use one prompt per block or line. Scene tags preserve order.</p>
+      <pre>[V1-S1] Establishing wide shot of a rainy neon street at midnight, reflective puddles, cinematic depth.
+
+[V1-S2] Medium shot of a courier under a flickering sign, soaked jacket, tense expression.</pre>
+    </section>
+
+    <section>
+      <h2>Frame To Video</h2>
+      <div class="syntax">
+        <strong>Format:</strong> <code>[V#-S#] image prompt ||| [V#-S#] video prompt</code>
+      </div>
+      <pre>[V1-S1] Cyberpunk city skyline at night, heavy rain, blue neon reflections ||| [V1-S1] Camera tilts down from skyline to street level as rain intensifies.
+
+[V1-S2] Courier standing near a glowing vending machine, steam vents behind him ||| [V1-S2] Slow dolly-in while jacket fabric moves in wind.</pre>
+    </section>
+
+    <section>
+      <h2>Character Reference Workflow</h2>
+      <ol>
+        <li>In <strong>Character Prompts</strong>, define each reusable handle once.</li>
+        <li>In <strong>Character Sources</strong>, upload source images or choose existing project/reference images for each handle.</li>
+        <li>In scene prompts, reuse the exact same <code>@handle</code>.</li>
+        <li>For existing Flow characters, map the handle to the existing Flow character instead of recreating it.</li>
+      </ol>
+      <div class="syntax">
+        <strong>Basic:</strong> <code>@handle character description</code><br>
+        <strong>Advanced:</strong> <code>@handle character description ||| voice: Flow voice name ||| info: extra notes</code>
+      </div>
+      <pre>@gary_before Overweight white man, plain white t-shirt, cheap athletic shorts, nervous expression. ||| voice: none
+
+@deandre Tall tan man, chiseled body, wavy dark hair, open shirt, smug relaxed face. ||| voice: Charon</pre>
+    </section>
+
+    <section>
+      <h2>Auto Flow Packet Import</h2>
+      <p>Use <strong>Paste Auto Flow Packet</strong> to paste characters, video prompts, and notes in one block. Auto Flow previews the packet before applying it into the existing Character Prompts and Video Prompts sections.</p>
+      <pre># CHARACTER PROMPTS
+@test_luma Luma Test Character is a fictional young adult explorer with a teal jacket, silver backpack, short black hair, and a warm expression. Not based on any real person. ||| voice: none ||| info: curious, calm, adventurous
+
+@test_orren Orren Test Character is a fictional young adult inventor with an amber hoodie, round glasses, curly brown hair, and a thoughtful expression. Not based on any real person. ||| voice: none ||| info: clever, nervous, precise
+
+# VIDEO PROMPTS
+[V1-S1] @test_luma stands at the edge of a glowing forest path, teal jacket catching soft blue light, cinematic fantasy realism. ||| Slow dolly-in as @test_luma looks toward the trees, curious and cautious.
+
+[V1-S2] @test_orren kneels beside a small mechanical device on a wooden table, amber hoodie sleeves rolled up, warm workshop lighting. ||| Camera pushes in as @test_orren adjusts the device and glances toward @test_luma.
+
+# NOTES
+Style: cinematic fantasy realism, soft lighting, shallow depth of field.
+Continuity: Keep @test_luma in teal jacket. Keep @test_orren in amber hoodie and glasses.
+Omni: Use native Flow character chips. Do not treat plain @text as proof.</pre>
+      <div class="syntax">
+        <strong>Copy this prompt into your LLM:</strong><br>
+        You are writing an Auto Flow Packet. Use # CHARACTER PROMPTS, # VIDEO PROMPTS, and # NOTES. Define every @handle before using it. Use fictional non-famous characters. Use lowercase snake_case handles. Do not invent undefined @mentions. Use ||| to split first-frame/image prompt from video motion prompt. Use @handles only where identity matters.
+      </div>
+      <div class="warning">
+        Packet import does not mark Omni ready. Omni/Path C stays <code>character_setup_required</code> until native Flow Character rows, <code>AT_TAG_TYPE</code>, and <code>characterServerId</code> proof exist.
+        After applying a packet, use <strong>Create / Verify Native Characters</strong>. Auto Flow verifies existing mappings or creates missing native Flow Characters from the Character Prompts, then stores <code>@handle -&gt; characterServerId</code> mappings only after true Character row proof exists.
+        Source images and project grid image assets count as <code>character_asset_created_but_not_native_character</code>: ready for Auto Flow Classic Match mapping, not Omni/Path C submission. A native row can remain <code>character_character_row_pending</code> until Flow exposes it in the @ picker.
+      </div>
+    </section>
+
+    <section>
+      <h2>Using Characters In Scene Prompts</h2>
+      <p>Use the same handle where identity matters. For long Omni scripts, bind the important speaker/identity mentions first instead of every repeated descriptive mention.</p>
+      <pre>[Scene 2] Hotel hallway at night. @gary_before rushes forward and shoves @deandre against the wall.
+
+Dialogue:
+@gary_before, furious: "Who are you?"
+@deandre, calm: "Back up."</pre>
+      <div class="warning">
+        <strong>Do not use spaces inside handles.</strong> Use <code>@gary_before</code>, not <code>@ gary before</code>. A display name like "Gary Before" can still map to the handle <code>@gary_before</code>.
+      </div>
+    </section>
+
+    <section>
+      <h2>Matching Modes</h2>
+      <table>
+        <thead><tr><th>Mode</th><th>Use For</th><th>What It Means</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Flow Native @ Match</strong></td>
+            <td>Existing or created Flow characters</td>
+            <td>Uses Google's native character chip/entity binding path.</td>
+          </tr>
+          <tr>
+            <td><strong>Auto Flow Classic Match</strong></td>
+            <td>Image references for Create Image, Frame to Video, Ingredients</td>
+            <td>Auto Flow's original matcher. It maps uploaded refs by handle, filename, or prompt row. It is not Omni-only.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Language-Agnostic Rules</h2>
+      <div class="ok">
+        The description text can be any language. Auto Flow only depends on the structural tokens: <span class="pill">one prompt per line/block</span><span class="pill">|||</span><span class="pill">@handle</span><span class="pill">voice:</span><span class="pill">info:</span>
+      </div>
+      <ul>
+        <li>Keep <code>@handle</code> in ASCII with no spaces.</li>
+        <li>Keep <code>|||</code> as the split marker.</li>
+        <li>Keep optional field names as <code>voice:</code> and <code>info:</code>.</li>
+        <li>Everything after those tokens can be natural prompt text.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

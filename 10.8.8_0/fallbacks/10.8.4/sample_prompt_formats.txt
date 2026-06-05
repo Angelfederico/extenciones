@@ -1,0 +1,54 @@
+AUTO FLOW - SAMPLE PROMPT FORMATS
+
+Use these as templates. Replace placeholder text with your own idea.
+
+========================================
+A) REGULAR PROMPTS (Text to Video / Create Image)
+========================================
+
+[V1-S1] Establishing wide shot of a rainy neon street at midnight, reflective puddles, cinematic depth, moody atmosphere.
+
+[V1-S2] Medium shot of a courier character under a flickering sign, soaked jacket, breathing visible in cold air, tense expression.
+
+[V1-S3] Close-up of gloved hand gripping a glowing data chip, droplets sliding across metal surface.
+
+[V1-S4] Over-the-shoulder shot entering a narrow alley, holographic ads flicker, camera slowly pushes forward.
+
+[V1-S5] Final hero shot on rooftop at dawn, storm fading, city lights transitioning to sunrise.
+
+Notes:
+- One prompt per block (blank line between prompts) keeps sorting cleaner.
+- Keep tags like [V1-S1] to preserve sequence.
+
+========================================
+B) IMAGE -> VIDEO WORKFLOW (Frame to Video)
+========================================
+
+Format:
+[V#-S#] image prompt ||| [V#-S#] video prompt
+
+Example:
+[V1-S1] Cyberpunk city skyline at night, heavy rain, blue-magenta neon reflections ||| [V1-S1] Camera tilts down from skyline to street level as rain intensifies and lights flicker.
+
+[V1-S2] Courier standing near glowing vending machine, steam vents in background ||| [V1-S2] Slow dolly-in toward courier while coat fabric moves in wind and steam drifts across frame.
+
+[V1-S3] Macro shot of wet data chip in hand, etched circuitry glowing amber ||| [V1-S3] Extreme close-up rack focus from raindrops to chip core as light pulses.
+
+[V1-S4] Alley entrance with hologram signs and wet asphalt ||| [V1-S4] Handheld-style forward movement through alley with slight shake and parallax.
+
+[V1-S5] Rooftop sunrise reveal over megacity, storm clouds breaking ||| [V1-S5] Wide crane-up shot as clouds part and warm sunlight spreads over skyline.
+
+[V2-S1] Desert outpost at golden hour, dust in the air, long shadows ||| [V2-S1] Slow panoramic sweep left to right revealing outpost scale.
+
+[V2-S2] Pilot checking damaged drone wing near hangar ||| [V2-S2] Medium orbit shot around pilot while dust particles move through sunbeams.
+
+[V2-S3] Close-up of cracked visor reflecting incoming sandstorm ||| [V2-S3] Push-in close-up with subtle head turn and reflected lightning in visor.
+
+[V2-S4] Wide shot of convoy leaving outpost, engines kicking dust ||| [V2-S4] Tracking side shot matching convoy speed with dynamic motion blur.
+
+[V2-S5] Night camp under stars with blue emergency lights ||| [V2-S5] Slow pullback from campfire to wide aerial as lights fade into darkness.
+
+Tips:
+- Keep the same scene tag on both sides of ||| for clarity.
+- Left side = image generation prompt.
+- Right side = motion/animation prompt for that same scene.

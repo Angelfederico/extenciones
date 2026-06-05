@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Auto Flow</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles/wizard.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="app-header">
+        <div class="brand">
+          <span class="brand-mark">AF</span>
+          <div class="brand-copy">
+            <div class="brand-title-row">
+              <h1 class="brand-title">Auto Flow</h1>
+              <span class="version-pill">v10.8.4</span>
+            </div>
+            <p class="brand-subtitle">
+              by <a href="https://ergophobia.info/" target="_blank" rel="noopener noreferrer">@ergophobian</a>
+              <span>&amp;</span>
+              <a href="https://duckmartians.info/" target="_blank" rel="noopener noreferrer">Duck Martians</a>
+            </p>
+          </div>
+        </div>
+        <div class="header-right">
+          <button id="header-home-btn" class="gear-btn" type="button" title="Runtime launcher" aria-label="Runtime launcher">
+            <span class="material-symbols-outlined">home</span>
+          </button>
+          <button id="header-usage-pill" class="header-usage-pill" type="button" title="Prompt usage">
+            <span class="usage-dot"></span>
+            <span id="header-usage-text">0/10</span>
+          </button>
+          <div class="support-menu-wrap">
+            <button id="header-support-btn" class="gear-btn" type="button" title="Support" aria-label="Support" aria-expanded="false">
+              <span class="material-symbols-outlined">support_agent</span>
+            </button>
+            <div id="support-menu" class="support-menu" role="menu" hidden>
+              <button id="support-discord-btn" type="button" role="menuitem">
+                <span class="material-symbols-outlined">forum</span>
+                Discord
+              </button>
+              <button id="support-telegram-btn" type="button" role="menuitem">
+                <span class="material-symbols-outlined">send</span>
+                Telegram
+              </button>
+            </div>
+          </div>
+          <button id="help-button" class="gear-btn" type="button" title="Help">
+            <span class="material-symbols-outlined">help</span>
+          </button>
+        </div>
+      </header>
+
+      <nav class="tabs" aria-label="Primary">
+        <button class="tab-button active" data-route="control" type="button">
+          <span class="material-symbols-outlined">play_circle</span>
+          Control
+        </button>
+        <button class="tab-button" data-route="live" type="button">
+          <span class="material-symbols-outlined">playlist_play</span>
+          Live Queue
+        </button>
+        <button class="tab-button" data-route="gallery" type="button">
+          <span class="material-symbols-outlined">photo_library</span>
+          Gallery
+        </button>
+        <button class="tab-button is-hidden-tab" data-route="history" type="button">
+          <span class="material-symbols-outlined">history</span>
+          History
+        </button>
+        <button class="tab-button" data-route="settings" type="button">
+          <span class="material-symbols-outlined">settings</span>
+          Settings
+        </button>
+        <button class="tab-button" data-route="logs" type="button">
+          <span class="material-symbols-outlined">receipt_long</span>
+          Logs
+        </button>
+        <button class="tab-button" data-route="scenes" type="button">
+          <span class="material-symbols-outlined">view_timeline</span>
+          Scenes
+        </button>
+      </nav>
+
+      <main class="tab-content">
+        <section id="view-control" class="view active" aria-label="Control"></section>
+        <section id="view-live" class="view" aria-label="Live Queue"></section>
+        <section id="view-gallery" class="view" aria-label="Gallery"></section>
+        <section id="view-history" class="view" aria-label="History"></section>
+        <section id="view-settings" class="view" aria-label="Settings"></section>
+        <section id="view-logs" class="view" aria-label="Logs"></section>
+        <section id="view-scenes" class="view" aria-label="Scenes"></section>
+      </main>
+    </div>
+
+    <div id="ref-overlay" class="ref-overlay" hidden>
+      <div class="ref-overlay-header">
+        <strong>Choose Reference Image</strong>
+        <button id="ref-import-btn" class="ref-import" type="button">
+          <span class="material-symbols-outlined">upload</span>
+          Import
+        </button>
+        <input id="ref-import-input" type="file" accept="image/*" multiple hidden>
+        <button id="ref-close" class="ref-close" type="button" title="Close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="ref-overlay-body">
+        <div class="ref-overlay-empty">Import images to build your saved reference library.</div>
+      </div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

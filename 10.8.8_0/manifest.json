@@ -1,0 +1,32 @@
+{
+   "background": {
+      "service_worker": "src/background/service-worker.js",
+      "type": "module"
+   },
+   "content_scripts": [ {
+      "js": [ "src/content/page-bridge.js" ],
+      "matches": [ "https://labs.google/*", "https://labs.google.com/*" ],
+      "run_at": "document_start"
+   } ],
+   "description": "Auto Flow generation queue for Google Flow.",
+   "host_permissions": [ "https://labs.google/*", "https://labs.google.com/*", "https://*.labs.google.com/*", "https://aisandbox-pa.googleapis.com/*", "https://yhcobtwwwhidignoifbg.supabase.co/*" ],
+   "icons": {
+      "128": "images/icon128.png",
+      "16": "images/icon16.png",
+      "48": "images/icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMgc7IlPdO7ROY1LaPDcBcsvCvLVF1ZT9nKM+lf9jZUdMP/plFg28A+vHHFJOwni1JmPODOuYogr9FYnJuHvejdIkXpgU6wquOW9F6GP0YWlNSrb3tTSVsDBViKsjD9+vAoGOx0nW55UzPbMvzZDay+iu4dT3aTtqPFWG57Hk+Rr7HmpvM0Vufre2t4Rj+aETO03/0NmjEx5eOZSZGbhsitzjMzc9ApYy+SL/hc7yAMU/o305OYFVsyg/A4vR65EeqUX+/c0E7tUo6zx2LJrRr/GSu6+FELmB0wSM8ZeaJdVYWirWoGSybv3mTVpVOlM/yTYrkXiefa6UFn8OMa6HQIDAQAB",
+   "manifest_version": 3,
+   "name": "Auto Flow",
+   "permissions": [ "sidePanel", "activeTab", "cookies", "browsingData", "scripting", "storage", "unlimitedStorage", "tabs", "downloads", "debugger" ],
+   "side_panel": {
+      "default_path": "src/gateway/gateway.html"
+   },
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "10.8.8",
+   "version_name": "10.8.8",
+   "web_accessible_resources": [ {
+      "matches": [ "https://labs.google/*", "https://labs.google.com/*" ],
+      "resources": [ "src/page/page-hook.js" ]
+   } ]
+}

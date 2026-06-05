@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Auto Flow Launcher</title>
+    <link rel="stylesheet" href="./gateway.css">
+  </head>
+  <body>
+    <main class="gateway-shell">
+      <section class="gateway-header" aria-label="Auto Flow">
+        <img class="gateway-logo" src="../../images/logo.png" alt="Auto Flow">
+        <div>
+          <p class="gateway-kicker">Auto Flow</p>
+          <h1>Choose Experience</h1>
+          <p class="gateway-subtitle">Launch the current build, or open the prior sidepanel layout while keeping the 10.8.8 automation engine.</p>
+        </div>
+      </section>
+
+      <section class="gateway-stack" aria-label="Versions">
+        <button id="launch-current" class="gateway-card gateway-card-primary" type="button">
+          <span class="gateway-badge">CURRENT</span>
+          <span class="gateway-icon material-symbols-outlined">rocket_launch</span>
+          <span class="gateway-copy">
+            <strong>Auto Flow 10.8.8</strong>
+            <span>Latest release with upload watchdog and Path C settle fixes.</span>
+          </span>
+          <span class="gateway-arrow material-symbols-outlined">chevron_right</span>
+        </button>
+
+        <details class="gateway-previous">
+          <summary>
+            <span class="material-symbols-outlined">history</span>
+            Compatibility Layout
+            <span class="summary-chevron material-symbols-outlined">expand_more</span>
+          </summary>
+          <button id="launch-1084" class="gateway-card gateway-card-rollback" type="button">
+            <span class="gateway-badge gateway-badge-stable">STABLE</span>
+            <span class="gateway-icon material-symbols-outlined">settings_backup_restore</span>
+            <span class="gateway-copy">
+              <strong>10.8.4 sidepanel layout</strong>
+              <span>Legacy UI shell only. Queue, DOM submit, downloads, and Flow bridge still use the installed 10.8.8 engine.</span>
+            </span>
+            <span class="gateway-arrow material-symbols-outlined">chevron_right</span>
+          </button>
+        </details>
+      </section>
+    </main>
+    <script type="module" src="./gateway.js"></script>
+  </body>
+</html>

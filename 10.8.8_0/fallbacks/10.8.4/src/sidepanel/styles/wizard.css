@@ -1,0 +1,1537 @@
+/*
+ * Auto Flow 10.8 wizard styles (Phase C — locked via /plan-design-review + /plan-eng-review)
+ * Layered ALONGSIDE existing styles.css (do not replace wholesale).
+ * Tokens lifted from /Users/kylekumar/Desktop/af-claude/DESIGN.md.
+ */
+
+/* ============================================================
+ * Tokens (af-claude calibration, lifted from design-preview/tokens.css)
+ * ============================================================ */
+:root {
+  --afw-bg-0: #070b1d;
+  --afw-bg-1: #0b1330;
+  --afw-bg-2: #111c3f;
+  --afw-overlay: rgba(7, 12, 28, 0.98);
+  --afw-surface: rgba(8, 14, 34, 0.55);
+  --afw-surface-strong: linear-gradient(160deg, rgba(20, 28, 58, 0.88), rgba(15, 21, 48, 0.88));
+  --afw-surface-toolbar: rgba(9, 16, 38, 0.96);
+  --afw-input: rgba(12, 20, 46, 0.86);
+  --afw-rail: rgba(7, 11, 26, 0.92);
+
+  --afw-text: #eff3ff;
+  --afw-text-muted: #a9b6de;
+  --afw-text-soft: #7f8db8;
+  --afw-text-subtle: #93a7d7;
+
+  --afw-accent: #6da7ff;
+  --afw-accent-2: #7de5ff;
+  --afw-success: #39d99e;
+  --afw-success-soft: rgba(53, 217, 158, 0.18);
+  --afw-success-grad: linear-gradient(130deg, rgba(53, 187, 143, 0.34), rgba(48, 166, 194, 0.29));
+  --afw-warning: #ffd166;
+  --afw-warning-grad: linear-gradient(130deg, rgba(244, 171, 66, 0.3), rgba(255, 149, 94, 0.24));
+  --afw-danger: #ff6f8e;
+  --afw-danger-grad: linear-gradient(130deg, rgba(220, 60, 60, 0.38), rgba(200, 80, 60, 0.32));
+  --afw-blue-soft: rgba(136, 169, 244, 0.2);
+
+  --afw-border: rgba(121, 154, 255, 0.18);
+  --afw-border-strong: rgba(139, 170, 255, 0.38);
+  --afw-border-focus: rgba(136, 169, 244, 0.45);
+  --afw-border-thumb: rgba(134, 167, 243, 0.42);
+
+  --afw-gold-1: #ffe9a6;
+  --afw-gold-2: #ffd56d;
+  --afw-gold-3: #ffbf4a;
+  --afw-gold-4: #c98a2e;
+
+  --afw-glow: 0 0 0 1px rgba(125, 168, 255, 0.15), 0 8px 22px rgba(53, 91, 188, 0.24);
+
+  --afw-r-thumb: 6px;
+  --afw-r-thumb-lg: 8px;
+  --afw-r-pill: 999px;
+  --afw-r-panel: 10px;
+  --afw-r-card: 14px;
+
+  --afw-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ============================================================
+ * Wizard root — only applies inside #view-control when wizard is active
+ * ============================================================ */
+.afw-root {
+  display: flex; flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--afw-text);
+  background: #0a1230;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.afw-root *, .afw-root *::before, .afw-root *::after { box-sizing: border-box; }
+.afw-root .material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+  user-select: none;
+}
+
+/* ============================================================
+ * Top brand strip
+ * ============================================================ */
+.afw-top {
+  height: 48px;
+  flex-shrink: 0;
+  display: flex; align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--afw-border);
+  background: var(--afw-surface-toolbar);
+}
+.afw-top .afw-mark {
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 10px; color: #2a1d05;
+  background: linear-gradient(145deg, var(--afw-gold-1), var(--afw-gold-3) 60%, var(--afw-gold-4));
+  box-shadow: 0 0 0 1px rgba(255, 219, 134, 0.20), 0 0 12px rgba(255, 203, 96, 0.30);
+  flex-shrink: 0;
+  animation: afw-brand-idle 6.5s ease-in-out infinite;
+}
+@keyframes afw-brand-idle {
+  0%, 90%, 100% { box-shadow: 0 0 0 1px rgba(255, 219, 134, 0.20), 0 0 12px rgba(255, 203, 96, 0.30); }
+  45% { box-shadow: 0 0 0 1px rgba(255, 219, 134, 0.32), 0 0 22px rgba(255, 203, 96, 0.55); }
+}
+.afw-top .afw-title-stack { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.afw-top .afw-t1 { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; }
+.afw-top .afw-t1 .afw-v {
+  font-size: 9px; color: var(--afw-text-soft); font-weight: 600;
+  padding: 1px 5px; border: 1px solid var(--afw-border); border-radius: 999px;
+}
+.afw-top .afw-t2 {
+  font-size: 10px;
+  color: var(--afw-text-soft);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+.afw-project-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+.afw-project-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.afw-top .afw-pdot {
+  flex: 0 0 auto;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--afw-success);
+  box-shadow: 0 0 5px rgba(53, 217, 158, 0.6);
+}
+.afw-top .afw-pdot.is-disconnected {
+  background: var(--afw-danger);
+  box-shadow: 0 0 5px rgba(255, 111, 142, 0.45);
+}
+.afw-top .afw-pdot.scanning {
+  background: var(--afw-accent-2);
+  animation: afw-scan-pulse 1.8s ease-in-out infinite;
+}
+.afw-bridge-pill {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 112px;
+  min-height: 17px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--afw-border);
+  background: rgba(255,255,255,0.04);
+  color: var(--afw-text-muted);
+  line-height: 1;
+}
+.afw-bridge-dot {
+  flex: 0 0 auto;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: currentColor;
+}
+.afw-bridge-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.afw-bridge-pill.is-healthy {
+  color: var(--afw-success);
+  border-color: rgba(53, 217, 158, 0.36);
+  background: rgba(53, 217, 158, 0.10);
+}
+.afw-bridge-pill.is-checking {
+  color: var(--afw-warning);
+  border-color: rgba(255, 209, 102, 0.38);
+  background: rgba(255, 209, 102, 0.10);
+}
+.afw-bridge-pill.is-offline {
+  color: var(--afw-danger);
+  border-color: rgba(255, 111, 142, 0.32);
+  background: rgba(255, 111, 142, 0.08);
+}
+@keyframes afw-scan-pulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(125, 229, 255, 0.5); }
+  50%      { box-shadow: 0 0 12px rgba(125, 229, 255, 0.95); }
+}
+.afw-top .afw-status-label {
+  font-size: 9.5px; color: var(--afw-text-soft);
+  margin-left: 3px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600;
+}
+
+.afw-account-strip {
+  flex-shrink: 0;
+  padding: 9px 12px;
+  border-bottom: 1px solid rgba(255, 213, 111, 0.28);
+  background: linear-gradient(145deg, rgba(74, 50, 18, 0.32), rgba(18, 20, 36, 0.62));
+}
+
+.afw-account-strip.is-pro {
+  border-bottom-color: rgba(53, 217, 158, 0.24);
+  background: linear-gradient(145deg, rgba(15, 70, 47, 0.28), rgba(18, 20, 36, 0.62));
+}
+
+.afw-account-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.afw-account-tier,
+.afw-account-usage {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 800;
+}
+
+.afw-account-tier {
+  color: var(--afw-gold-2);
+}
+
+.afw-account-strip.is-pro .afw-account-tier {
+  color: var(--afw-success);
+}
+
+.afw-account-usage {
+  color: #ffe7b6;
+  padding: 2px 7px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 213, 111, 0.28);
+  box-shadow: 0 0 10px rgba(255, 203, 96, 0.18);
+}
+
+.afw-account-bar {
+  height: 5px;
+  margin-top: 7px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.afw-account-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--afw-gold-2), var(--afw-gold-4));
+}
+
+.afw-account-strip.is-pro .afw-account-bar span {
+  background: linear-gradient(90deg, var(--afw-success), var(--afw-accent-2));
+}
+
+.afw-account-note {
+  margin: 7px 0 0;
+  color: var(--afw-text-muted);
+  font-size: 10.5px;
+}
+
+.afw-account-auth {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.afw-account-auth #bannerEmailStep,
+.afw-account-auth #bannerOtpStep {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px;
+}
+
+.afw-account-auth #bannerEmailStep {
+  display: grid;
+}
+
+.afw-account-auth input {
+  min-width: 0;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--afw-border);
+  background: var(--afw-input);
+  color: var(--afw-text);
+  padding: 0 9px;
+  font: inherit;
+}
+
+.afw-account-auth button {
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 213, 111, 0.28);
+  background: rgba(255, 213, 111, 0.12);
+  color: #ffe7b6;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* ============================================================
+ * DOM / API route bar
+ * ============================================================ */
+.afw-route-bar {
+  flex-shrink: 0;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--afw-border);
+  background: rgba(7, 11, 26, 0.55);
+  display: flex; align-items: center; gap: 9px;
+}
+.afw-route-bar .afw-route-label {
+  font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--afw-text-soft); font-weight: 700; flex-shrink: 0;
+}
+.afw-route-buttons { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.afw-route-btn {
+  border: 1px solid var(--afw-border);
+  background: linear-gradient(155deg, rgba(18, 26, 58, 0.95), rgba(13, 20, 43, 0.95));
+  color: var(--afw-text-muted);
+  border-radius: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+  font-size: 11px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: inherit;
+  transition: color .15s ease, border-color .15s ease;
+}
+.afw-route-btn .material-symbols-outlined { font-size: 14px; }
+.afw-route-btn:hover { color: var(--afw-text); border-color: rgba(138, 181, 255, 0.4); }
+.afw-route-btn.active {
+  color: #ecf5ff;
+  border-color: rgba(138, 181, 255, 0.6);
+  background: linear-gradient(140deg, rgba(66, 113, 255, 0.36), rgba(54, 195, 255, 0.24));
+  box-shadow:
+    0 0 0 1px rgba(142, 177, 255, 0.22),
+    0 0 14px rgba(89, 129, 255, 0.22),
+    inset 0 0 14px rgba(120, 160, 255, 0.08);
+  animation: afw-active-pulse 2.4s ease-in-out infinite;
+}
+@keyframes afw-active-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(142, 177, 255, 0.22), 0 0 12px rgba(89, 129, 255, 0.18); }
+  50%      { box-shadow: 0 0 0 1px rgba(142, 177, 255, 0.32), 0 0 18px rgba(89, 129, 255, 0.32); }
+}
+
+/* ============================================================
+ * Mode buttons (af-claude pattern, 2x2, 84px tall)
+ * ============================================================ */
+.afw-mode-frame { padding: 10px 12px; border-bottom: 1px solid var(--afw-border); }
+.afw-mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.afw-mode-btn {
+  min-height: 84px;
+  border: 1px solid var(--afw-border);
+  background: linear-gradient(155deg, rgba(18, 26, 58, 0.95), rgba(13, 20, 43, 0.95));
+  color: var(--afw-text-muted);
+  border-radius: 12px;
+  padding: 10px 8px;
+  cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  font-family: inherit;
+  font-size: 12px; font-weight: 600;
+  text-align: center;
+  line-height: 1.25;
+  transition: color .15s ease, border-color .15s ease;
+}
+.afw-mode-btn .material-symbols-outlined { font-size: 24px; color: var(--afw-text-muted); transition: color .15s ease; }
+.afw-mode-btn:hover { color: var(--afw-text); border-color: rgba(138, 181, 255, 0.4); }
+.afw-mode-btn:hover .material-symbols-outlined { color: var(--afw-accent); }
+.afw-mode-btn.active {
+  color: #ecf5ff;
+  border-color: rgba(138, 181, 255, 0.6);
+  background: linear-gradient(140deg, rgba(66, 113, 255, 0.36), rgba(54, 195, 255, 0.24));
+  box-shadow:
+    0 0 0 1px rgba(142, 177, 255, 0.22),
+    0 0 14px rgba(89, 129, 255, 0.22),
+    inset 0 0 14px rgba(120, 160, 255, 0.06);
+  animation: afw-active-pulse 2.4s ease-in-out infinite;
+}
+.afw-mode-btn.active .material-symbols-outlined { color: #ecf5ff; }
+
+/* ============================================================
+ * Stepper
+ * ============================================================ */
+.afw-stepper {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  background: rgba(7, 11, 26, 0.35);
+  border-bottom: 1px solid var(--afw-border);
+}
+.afw-stepper-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; align-items: center; }
+.afw-step {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 8px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.afw-step .afw-num {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--afw-border);
+  background: rgba(7, 11, 26, 0.6);
+  color: var(--afw-text-muted);
+  font-size: 9.5px; font-weight: 700;
+  display: grid; place-items: center;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.afw-step .afw-lbl { font-size: 10.5px; color: var(--afw-text-muted); font-weight: 600; }
+.afw-step.done .afw-num { background: var(--afw-success-soft); border-color: rgba(53, 217, 158, 0.5); color: var(--afw-success); }
+.afw-step.done .afw-num span { display: none; }
+.afw-step.done .afw-num::before { content: "✓"; font-weight: 700; }
+.afw-step.done .afw-lbl { color: var(--afw-text); }
+.afw-step.active .afw-num {
+  background: linear-gradient(140deg, rgba(66, 113, 255, 0.45), rgba(54, 195, 255, 0.32));
+  border-color: rgba(138, 181, 255, 0.55);
+  color: #ecf5ff;
+}
+.afw-step.active .afw-lbl { color: var(--afw-text); }
+
+/* ============================================================
+ * Step view: header (sticky) + body (scrolls)
+ * ============================================================ */
+.afw-step-view { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.afw-step-header {
+  flex-shrink: 0;
+  padding: 10px 12px 9px;
+  display: flex; align-items: center; gap: 9px;
+  border-bottom: 1px solid var(--afw-border);
+  background: rgba(7, 11, 26, 0.45);
+}
+.afw-step-header h2 {
+  margin: 0; flex: 1; min-width: 0;
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; gap: 6px;
+  color: var(--afw-text);
+}
+.afw-step-header h2 .material-symbols-outlined { color: var(--afw-accent); font-size: 16px; }
+.afw-step-body {
+  flex: 1; overflow-y: auto;
+  padding: 10px 12px 14px;
+  display: flex; flex-direction: column;
+  gap: 9px;
+}
+.afw-step-body .afw-lede { font-size: 10.5px; color: var(--afw-text-muted); line-height: 1.5; margin: 0 0 2px; }
+
+.afw-eyebrow {
+  font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--afw-text-soft); font-weight: 700;
+  margin: 0 0 6px;
+  display: flex; align-items: center; gap: 5px;
+}
+.afw-eyebrow .material-symbols-outlined { font-size: 12px; }
+.afw-eyebrow .afw-right { margin-left: auto; font-weight: 600; color: var(--afw-text-muted); text-transform: none; letter-spacing: 0; }
+.afw-eyebrow .afw-right b { color: var(--afw-text); font-weight: 700; }
+
+/* ============================================================
+ * Step 1: paste prompts
+ * ============================================================ */
+.afw-paste {
+  border: 1px solid var(--afw-border);
+  background: var(--afw-input);
+  border-radius: 10px;
+  padding: 11px;
+  display: flex; flex-direction: column; gap: 9px;
+}
+.afw-paste textarea {
+  background: transparent; border: 0;
+  color: var(--afw-text);
+  font-size: 12px; line-height: 1.55;
+  resize: vertical; min-height: 130px;
+  outline: none; font-family: inherit;
+}
+.afw-paste textarea::placeholder { color: var(--afw-text-soft); }
+.afw-paste .afw-paste-row {
+  display: flex; align-items: center; gap: 6px;
+  border-top: 1px solid var(--afw-border);
+  padding-top: 9px;
+}
+.afw-paste .afw-paste-ct {
+  font-size: 10.5px; color: var(--afw-text-muted); margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+.afw-paste .afw-paste-ct b { color: var(--afw-success); font-weight: 700; }
+
+.afw-prompt-mini {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 7px 10px;
+  border-bottom: 1px solid rgba(125, 156, 231, 0.06);
+  font-size: 11.5px;
+  color: var(--afw-text);
+}
+.afw-prompt-mini:last-child { border-bottom: 0; }
+.afw-prompt-mini .afw-idx { font-family: var(--afw-font-mono); color: var(--afw-text-soft); flex-shrink: 0; width: 18px; font-size: 10px; padding-top: 1px; font-variant-numeric: tabular-nums; }
+.afw-prompt-mini .afw-body { flex: 1; min-width: 0; line-height: 1.5; }
+.afw-prompt-preview-scroll {
+  border: 1px solid var(--afw-border);
+  border-radius: 10px;
+  overflow: hidden auto;
+  max-height: 340px;
+  overscroll-behavior: contain;
+}
+
+/* ============================================================
+ * Step 2: references
+ * ============================================================ */
+.afw-reflib-row {
+  display: flex; align-items: center; gap: 9px;
+  padding: 9px 11px;
+  border: 1px solid var(--afw-border);
+  background: rgba(7, 11, 26, 0.4);
+  border-radius: 9px;
+}
+.afw-reflib-main {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  flex: 1;
+}
+.afw-reflib-row .afw-icn {
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  background: rgba(7, 11, 26, 0.6);
+  border: 1px solid var(--afw-border);
+  display: grid; place-items: center;
+  color: var(--afw-accent);
+  flex-shrink: 0;
+}
+.afw-reflib-row .afw-icn .material-symbols-outlined { font-size: 15px; }
+.afw-reflib-row .afw-meta { flex: 1; min-width: 0; }
+.afw-reflib-row .afw-meta .afw-name { font-size: 11.5px; font-weight: 600; color: var(--afw-text); }
+.afw-reflib-row .afw-meta .afw-sub { font-size: 9.5px; color: var(--afw-text-soft); margin-top: 1px; }
+.afw-reflib-row .afw-add-btn {
+  border: 1px solid rgba(138, 181, 255, 0.4);
+  background: linear-gradient(140deg, rgba(66, 113, 255, 0.18), rgba(54, 195, 255, 0.12));
+  color: #ecf5ff;
+  border-radius: 7px;
+  padding: 5px 9px;
+  font-size: 10.5px; font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.afw-reflib-row .afw-add-btn .material-symbols-outlined { font-size: 13px; }
+
+.afw-no-refs-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(138, 181, 255, 0.24);
+  background: rgba(7, 11, 26, 0.44);
+  border-radius: 9px;
+}
+.afw-no-refs-card .afw-icn {
+  width: 34px;
+  height: 34px;
+  border-radius: 7px;
+  border: 1px solid rgba(125, 229, 255, 0.24);
+  background: rgba(125, 229, 255, 0.10);
+  display: grid;
+  place-items: center;
+  color: var(--afw-accent);
+  flex-shrink: 0;
+}
+.afw-no-refs-card .afw-icn .material-symbols-outlined { font-size: 19px; }
+.afw-no-refs-card .afw-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.afw-no-refs-card .afw-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--afw-text);
+}
+.afw-no-refs-card .afw-sub {
+  font-size: 10.5px;
+  color: var(--afw-text-soft);
+}
+
+.afw-big-upload {
+  width: 100%;
+  border: 1px solid rgba(138, 181, 255, 0.48);
+  background: linear-gradient(140deg, rgba(66, 113, 255, 0.22), rgba(54, 195, 255, 0.13));
+  color: #ecf5ff;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  cursor: pointer;
+  text-align: left;
+}
+.afw-big-upload > .material-symbols-outlined {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: rgba(7, 11, 26, 0.45);
+  color: var(--afw-accent);
+}
+.afw-big-upload-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.afw-big-upload-copy strong {
+  font-size: 12px;
+  font-weight: 700;
+}
+.afw-big-upload-copy small {
+  color: var(--afw-text-soft);
+  font-size: 10.5px;
+}
+
+.afw-save-library-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  color: var(--afw-text-soft);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+.afw-save-library-toggle input {
+  accent-color: var(--afw-accent);
+}
+
+.afw-ref-strip { display: flex; gap: 6px; overflow-x: auto; padding: 4px 0; }
+.afw-ref-strip .afw-rt {
+  flex-shrink: 0;
+  width: 60px; aspect-ratio: 1;
+  border-radius: 7px;
+  border: 1px solid var(--afw-border-thumb);
+  position: relative; overflow: hidden;
+  cursor: grab;
+  background: var(--afw-input);
+}
+.afw-ref-strip .afw-rt.active {
+  border-color: rgba(62, 231, 171, 0.9);
+  box-shadow: 0 0 0 1px rgba(62, 231, 171, 0.35);
+}
+.afw-ref-strip .afw-rt.temporary {
+  border-style: dashed;
+}
+.afw-ref-strip .afw-rt .afw-face { position: absolute; inset: 0; display: grid; place-items: center; color: rgba(255,255,255,0.92); font-weight: 700; font-size: 14px; }
+.afw-ref-strip .afw-rt img.afw-face { width: 100%; height: 100%; object-fit: cover; }
+.afw-ref-strip .afw-rt .afw-rname {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 2px 4px;
+  font-size: 8px; font-weight: 600;
+  color: rgba(255,255,255,0.95);
+  background: linear-gradient(0deg, rgba(0,0,0,0.78), transparent);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.afw-ref-strip .afw-rt .afw-ref-check {
+  position: absolute; top: 3px; left: 3px;
+  width: 16px; height: 16px;
+  display: grid; place-items: center;
+  border-radius: 999px;
+  background: rgba(18, 128, 89, 0.92);
+  color: #fff;
+}
+.afw-ref-strip .afw-rt .afw-ref-check .material-symbols-outlined { font-size: 12px; }
+.afw-ref-strip .afw-rt .afw-temp-badge {
+  position: absolute;
+  left: 3px;
+  top: 22px;
+  padding: 1px 4px;
+  border-radius: 999px;
+  background: rgba(7, 11, 26, 0.78);
+  color: rgba(255,255,255,0.9);
+  font-size: 7px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.afw-ref-strip .afw-rt .afw-ref-remove {
+  position: absolute; top: 3px; right: 3px;
+  width: 18px; height: 18px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(5, 9, 20, 0.78);
+  color: rgba(255,255,255,0.95);
+  display: grid; place-items: center;
+  padding: 0;
+  cursor: pointer;
+}
+.afw-ref-strip .afw-rt .afw-ref-remove .material-symbols-outlined { font-size: 13px; }
+.afw-ref-strip .afw-rt-empty {
+  flex: 1;
+  border: 1.5px dashed rgba(125, 168, 255, 0.32);
+  border-radius: 7px;
+  padding: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--afw-text-soft);
+  font-size: 10.5px;
+  background: rgba(125, 168, 255, 0.04);
+}
+.afw-frame-slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.afw-frame-slot {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  min-height: 56px;
+  border: 1px solid rgba(125, 168, 255, 0.24);
+  border-radius: 8px;
+  background: rgba(10, 16, 35, 0.58);
+  padding: 6px;
+}
+.afw-frame-slot.filled {
+  border-color: rgba(62, 231, 171, 0.48);
+}
+.afw-frame-slot-preview {
+  width: 46px;
+  height: 46px;
+  border-radius: 7px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: rgba(125, 168, 255, 0.08);
+  color: var(--afw-text-soft);
+}
+.afw-frame-slot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.afw-frame-slot-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.afw-frame-slot-copy strong {
+  font-size: 11px;
+  font-weight: 800;
+}
+.afw-frame-slot-copy span {
+  color: var(--afw-text-soft);
+  font-size: 9.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.afw-frame-slot-badge,
+.afw-frame-slot-clear {
+  border-radius: 999px;
+  border: 1px solid rgba(125, 168, 255, 0.22);
+  background: rgba(7, 11, 26, 0.48);
+  color: var(--afw-text-soft);
+  font-size: 8px;
+  font-weight: 800;
+  padding: 3px 6px;
+  text-transform: uppercase;
+}
+.afw-frame-slot-badge.required {
+  color: #3ee7ab;
+  border-color: rgba(62, 231, 171, 0.35);
+}
+.afw-frame-slot-clear {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.afw-frame-slot-clear .material-symbols-outlined {
+  font-size: 14px;
+}
+.afw-ref-upload-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.afw-ref-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* 4-CTA action grid (Shared / 1:1 Batch / Repeat 1st / Auto-match) */
+.afw-cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.afw-cta {
+  border: 1px solid var(--afw-border);
+  background: linear-gradient(155deg, rgba(18, 26, 58, 0.95), rgba(13, 20, 43, 0.95));
+  color: var(--afw-text);
+  border-radius: 10px;
+  padding: 11px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
+  transition: color .15s ease, border-color .15s ease;
+  text-align: left;
+}
+.afw-cta:hover { border-color: rgba(138, 181, 255, 0.4); }
+.afw-cta .afw-icn {
+  width: 28px; height: 28px;
+  border-radius: 7px;
+  background: rgba(7, 11, 26, 0.5);
+  border: 1px solid var(--afw-border);
+  display: grid; place-items: center;
+  color: var(--afw-accent);
+  flex-shrink: 0;
+}
+.afw-cta .afw-icn .material-symbols-outlined { font-size: 16px; }
+.afw-cta .afw-meta { display: flex; flex-direction: column; min-width: 0; }
+.afw-cta .afw-meta .afw-name { font-size: 11.5px; font-weight: 700; color: var(--afw-text); }
+.afw-cta .afw-meta .afw-sub { font-size: 9.5px; color: var(--afw-text-soft); margin-top: 1px; }
+.afw-cta.active {
+  border-color: rgba(138, 181, 255, 0.6);
+  box-shadow: 0 0 0 1px rgba(142, 177, 255, 0.22), 0 0 12px rgba(89, 129, 255, 0.18);
+  animation: afw-active-pulse 2.4s ease-in-out infinite;
+}
+/* signature accent per CTA */
+.afw-cta[data-cta="shared"] .afw-icn { color: var(--afw-accent-2); background: rgba(125, 229, 255, 0.10); border-color: rgba(125, 229, 255, 0.28); }
+.afw-cta[data-cta="batch"]  .afw-icn { color: #6da7ff;            background: rgba(109, 167, 255, 0.10); border-color: rgba(109, 167, 255, 0.30); }
+.afw-cta[data-cta="repeat"] .afw-icn { color: var(--afw-gold-3);  background: rgba(255, 191, 74, 0.10);  border-color: rgba(255, 191, 74, 0.30); }
+.afw-cta[data-cta="match"]  .afw-icn { color: var(--afw-success); background: rgba(53, 217, 158, 0.10);  border-color: rgba(53, 217, 158, 0.30); }
+.afw-cta[data-cta="shared"].active { background: linear-gradient(140deg, rgba(125, 229, 255, 0.30), rgba(125, 229, 255, 0.14)); border-color: rgba(125, 229, 255, 0.55); }
+.afw-cta[data-cta="batch"].active  { background: linear-gradient(140deg, rgba(109, 167, 255, 0.32), rgba(54, 195, 255, 0.20)); border-color: rgba(138, 181, 255, 0.55); }
+.afw-cta[data-cta="repeat"].active { background: linear-gradient(140deg, rgba(255, 191, 74, 0.30), rgba(255, 191, 74, 0.14));  border-color: rgba(255, 191, 74, 0.55); }
+.afw-cta[data-cta="match"].active  { background: linear-gradient(140deg, rgba(53, 217, 158, 0.30), rgba(53, 217, 158, 0.14));  border-color: rgba(53, 217, 158, 0.55); }
+
+/* ============================================================
+ * Step 3: review pair list + settings card + estimate
+ * ============================================================ */
+.afw-pair-list {
+  border: 1px solid var(--afw-border);
+  background: rgba(7, 11, 26, 0.4);
+  border-radius: 10px;
+  overflow: hidden;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.afw-pair-row {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  gap: 9px; align-items: center;
+  padding: 7px 11px;
+  border-bottom: 1px solid rgba(125, 156, 231, 0.06);
+  font-size: 11px;
+}
+.afw-pair-row:last-child { border-bottom: 0; }
+.afw-pair-row .afw-idx {
+  font-family: var(--afw-font-mono);
+  font-size: 10px;
+  color: var(--afw-text-soft);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.afw-pair-row .afw-text {
+  color: var(--afw-text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  line-height: 1.45;
+}
+.afw-pair-row .afw-refs { display: flex; gap: 3px; align-items: center; }
+.afw-pair-row .afw-ref-mini {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  border: 1px solid var(--afw-border-thumb);
+  display: grid; place-items: center;
+  font-size: 8.5px; font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  flex-shrink: 0;
+  overflow: hidden;
+  background: rgba(7, 11, 26, 0.55);
+}
+.afw-pair-row .afw-ref-mini-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.afw-pair-row .afw-ref-mini-fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+.afw-pair-row .afw-no-ref {
+  font-size: 9px; color: var(--afw-warning);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding: 1px 5px;
+  background: rgba(255, 209, 102, 0.08);
+  border: 1px solid rgba(255, 209, 102, 0.22);
+  border-radius: 999px;
+}
+
+.afw-gen-card {
+  border: 1px solid var(--afw-border);
+  background: var(--afw-surface-strong);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.afw-gen-row {
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  gap: 9px;
+  align-items: center;
+  padding: 9px 11px;
+  border-bottom: 1px solid rgba(125, 156, 231, 0.06);
+}
+.afw-gen-row:last-child { border-bottom: 0; }
+.afw-gen-row .afw-icn-wrap {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  background: rgba(7, 11, 26, 0.5);
+  border: 1px solid var(--afw-border);
+  display: grid; place-items: center;
+  color: var(--afw-accent);
+}
+.afw-gen-row .afw-icn-wrap .material-symbols-outlined { font-size: 13px; }
+.afw-gen-row .afw-label-stack { display: flex; flex-direction: column; min-width: 0; }
+.afw-gen-row .afw-label { font-size: 11.5px; font-weight: 600; color: var(--afw-text); display: flex; align-items: center; gap: 5px; }
+.afw-gen-row .afw-sub { font-size: 10px; color: var(--afw-text-soft); margin-top: 1px; }
+.afw-gen-row .afw-val-btn {
+  border: 1px solid var(--afw-border);
+  background: var(--afw-input);
+  color: var(--afw-text);
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 11px; font-weight: 600;
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: inherit;
+}
+.afw-gen-row .afw-val-btn:hover { border-color: rgba(138, 181, 255, 0.4); }
+.afw-gen-row.is-disabled { opacity: 0.55; }
+.afw-gen-row.is-disabled .afw-val-btn,
+.afw-gen-row .afw-val-btn:disabled {
+  cursor: not-allowed;
+  color: var(--afw-text-soft);
+  border-color: rgba(125, 156, 231, 0.12);
+  background: rgba(7, 11, 26, 0.45);
+}
+.afw-gen-row .afw-val-btn .material-symbols-outlined { font-size: 13px; color: var(--afw-text-muted); }
+.afw-gen-row .afw-default-tag {
+  font-size: 8.5px; color: var(--afw-text-soft);
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;
+  padding: 1px 5px;
+  background: rgba(7, 11, 26, 0.6);
+  border: 1px solid rgba(125, 156, 231, 0.15);
+  border-radius: 999px;
+}
+
+.afw-estimate {
+  border: 1px solid var(--afw-border);
+  background: rgba(53, 217, 158, 0.06);
+  border-radius: 9px;
+  padding: 10px 12px;
+  font-size: 11px;
+  color: var(--afw-text-muted);
+  display: flex; flex-direction: column; gap: 3px;
+}
+.afw-estimate .afw-est-row {
+  display: flex; align-items: center; justify-content: space-between;
+  font-variant-numeric: tabular-nums;
+}
+.afw-estimate b { color: var(--afw-success); font-weight: 700; }
+
+/* ============================================================
+ * Step nav (bottom): Back + step summary
+ * ============================================================ */
+.afw-step-nav {
+  flex-shrink: 0;
+  padding: 10px 12px 12px;
+  border-top: 1px solid var(--afw-border);
+  background: rgba(7, 11, 26, 0.6);
+  display: flex; gap: 7px; align-items: center;
+}
+.afw-back {
+  border: 1px solid var(--afw-border);
+  background: var(--afw-input);
+  color: var(--afw-text-muted);
+  border-radius: 8px;
+  padding: 10px 13px;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: inherit;
+}
+.afw-back:hover { color: var(--afw-text); border-color: rgba(138, 181, 255, 0.4); }
+.afw-back.disabled { opacity: .35; pointer-events: none; }
+.afw-back .material-symbols-outlined { font-size: 16px; }
+.afw-step-summary {
+  flex: 1; text-align: center;
+  font-size: 10.5px; color: var(--afw-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+ * Next / Run buttons (green, in step header) — primary action
+ * ============================================================ */
+.afw-next, .afw-run {
+  min-height: 32px;
+  border-radius: 8px;
+  font-size: 11.5px; font-weight: 700;
+  cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: inherit;
+  padding: 8px 13px;
+  white-space: nowrap;
+  color: #ecfff7;
+  border: 1px solid rgba(53, 217, 158, 0.55);
+  background: linear-gradient(140deg, rgba(53, 217, 158, 0.32), rgba(79, 184, 232, 0.22));
+  box-shadow: 0 0 0 1px rgba(53, 217, 158, 0.22), 0 0 12px rgba(53, 217, 158, 0.18);
+  transition: transform .12s ease;
+  animation: afw-green-pulse 2.4s ease-in-out infinite;
+}
+.afw-next:hover, .afw-run:hover { transform: translateY(-1px); }
+.afw-next .material-symbols-outlined,
+.afw-run .material-symbols-outlined { font-size: 15px; color: var(--afw-success); }
+.afw-run .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24; }
+.afw-run:disabled {
+  animation: none;
+  color: rgba(236, 255, 247, 0.72);
+  border-color: rgba(255, 207, 105, 0.46);
+  background: rgba(255, 207, 105, 0.10);
+  box-shadow: 0 0 0 1px rgba(255, 207, 105, 0.14);
+}
+.afw-run:disabled .material-symbols-outlined { color: var(--afw-warn); }
+.afw-run-wrap {
+  display: inline-flex;
+  align-items: center;
+}
+@keyframes afw-green-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(53, 217, 158, 0.22), 0 0 12px rgba(53, 217, 158, 0.18); }
+  50%      { box-shadow: 0 0 0 1px rgba(53, 217, 158, 0.36), 0 0 18px rgba(53, 217, 158, 0.32); }
+}
+
+/* ============================================================
+ * Step-header action group + inline Back button
+ * Back lives next to Next/Run in the sticky step header so both
+ * directions are reachable without scroll. Bottom step-nav now
+ * shows only the step summary.
+ *
+ * Same animation recipe as Next (halo pulse + sheen sweep) but in
+ * af-accent BLUE (#6da7ff family) so the secondary action is
+ * visually subordinate to the primary green Next/Run.
+ * ============================================================ */
+.afw-step-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+.afw-step-actions .afw-run-wrap { display: inline-flex; align-items: center; }
+
+.afw-back-inline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 32px;
+  padding: 0 12px 0 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(138, 181, 255, 0.55);
+  background: linear-gradient(140deg, rgba(20, 38, 84, 0.96), rgba(8, 18, 40, 0.96));
+  color: #d6e6ff;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  font-family: inherit;
+  isolation: isolate;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(109, 167, 255, 0.35),
+    0 0 10px rgba(125, 168, 255, 0.32),
+    0 0 22px rgba(89, 129, 255, 0.22);
+  animation: afw-back-halo 4.4s ease-in-out infinite;
+  transition: transform 120ms ease;
+}
+.afw-back-inline:hover { transform: translateY(-1px); }
+.afw-back-inline:focus-visible {
+  outline: 2px solid rgba(138, 181, 255, 0.7);
+  outline-offset: 2px;
+}
+
+@keyframes afw-back-halo {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(109, 167, 255, 0.35),
+      0 0 10px rgba(125, 168, 255, 0.32),
+      0 0 22px rgba(89, 129, 255, 0.22);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(138, 181, 255, 0.55),
+      0 0 14px rgba(125, 168, 255, 0.55),
+      0 0 30px rgba(89, 129, 255, 0.40);
+  }
+}
+
+/* Sheen sweep on the inline Back, same recipe as Next, blue-tinted highlight. */
+.afw-back-inline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(190, 215, 255, 0.20) 50%,
+    transparent 62%,
+    transparent 100%
+  );
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  animation: afw-back-sheen 3.5s cubic-bezier(0.55, 0.05, 0.45, 0.95) infinite;
+  mix-blend-mode: screen;
+  border-radius: inherit;
+}
+
+@keyframes afw-back-sheen {
+  0%   { background-position: 120% 0; }
+  60%  { background-position: -20% 0; }
+  100% { background-position: -20% 0; }
+}
+
+.afw-back-inline .material-symbols-outlined {
+  font-size: 15px;
+  color: #88a9f4;
+  position: relative;
+  z-index: 1;
+}
+
+/* Bottom step-nav: Back is gone, only the summary remains. */
+.afw-step-nav { justify-content: center; }
+.afw-step-nav .afw-step-summary { text-align: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .afw-back-inline,
+  .afw-back-inline::after {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+ * Reduced-motion
+ * ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .afw-mode-btn,
+  .afw-route-btn,
+  .afw-cta,
+  .afw-next,
+  .afw-run,
+  .afw-top .afw-mark,
+  .afw-top .afw-pdot.scanning {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+ * Modal dialog (mode-change confirm)
+ * ============================================================ */
+.afw-dialog-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(7, 11, 26, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: grid; place-items: center;
+  padding: 16px;
+}
+.afw-dialog {
+  background: var(--afw-surface-strong);
+  border: 1px solid var(--afw-border-strong);
+  border-radius: 12px;
+  padding: 18px 18px 14px;
+  max-width: 360px; width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(142, 177, 255, 0.2);
+}
+.afw-dialog h3 { margin: 0 0 8px; font-size: 13px; font-weight: 700; color: var(--afw-text); }
+.afw-dialog p { margin: 0 0 16px; font-size: 11.5px; color: var(--afw-text-muted); line-height: 1.5; }
+.afw-dialog-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.afw-dialog-actions button {
+  font-family: inherit; font-size: 11.5px; font-weight: 600;
+  border-radius: 7px; padding: 7px 14px;
+  cursor: pointer;
+}
+.afw-dialog-actions .afw-cancel {
+  border: 1px solid var(--afw-border);
+  background: var(--afw-input);
+  color: var(--afw-text-muted);
+}
+.afw-dialog-actions .afw-cancel:hover { color: var(--afw-text); border-color: var(--afw-border-strong); }
+.afw-dialog-actions .afw-confirm {
+  border: 1px solid rgba(53, 217, 158, 0.55);
+  background: linear-gradient(140deg, rgba(53, 217, 158, 0.32), rgba(79, 184, 232, 0.22));
+  color: #ecfff7;
+}
+.afw-dialog-actions .afw-confirm:hover { transform: translateY(-1px); }
+
+
+/* ============================================================
+ * Header PRO pill — augments the existing #header-usage-pill.is-pro
+ * (rendered by index.html, toggled by app.js when state.account.plan === pro).
+ *
+ * styles.css already provides the green border + base box-shadow + 'pro-glow'
+ * keyframe. We layer on:
+ *   - afw-pill-halo  : richer multi-stop box-shadow pulse (overrides pro-glow)
+ *   - ::after sheen  : diagonal highlight sweep, 3.5s, mix-blend-mode: screen
+ *   - text gradient  : background-clip: text on the "PRO" label
+ *
+ * Loaded after styles.css so cascade wins without !important on most rules.
+ * NO conic-gradient ring — chips signal status, they don't perform.
+ * ============================================================ */
+.header-usage-pill.is-pro {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* Override the existing 'pro-glow' keyframe with a layered emerald halo. */
+  animation: afw-pill-halo 4.4s ease-in-out infinite !important;
+  box-shadow:
+    0 0 0 1px rgba(53, 217, 158, 0.35),
+    0 0 10px rgba(95, 255, 210, 0.40),
+    0 0 22px rgba(53, 217, 158, 0.28);
+}
+
+@keyframes afw-pill-halo {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(53, 217, 158, 0.35),
+      0 0 10px rgba(95, 255, 210, 0.40),
+      0 0 22px rgba(53, 217, 158, 0.28);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(125, 229, 200, 0.55),
+      0 0 14px rgba(125, 255, 220, 0.55),
+      0 0 30px rgba(53, 217, 158, 0.40);
+  }
+}
+
+/* Sheen sweep: thin diagonal highlight that travels across every 3.5s.
+ * mix-blend-mode: screen so the highlight reads as glow not paint. */
+.header-usage-pill.is-pro::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(180, 255, 220, 0.22) 50%,
+    transparent 62%,
+    transparent 100%
+  );
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  animation: afw-pill-sheen 3.5s cubic-bezier(0.55, 0.05, 0.45, 0.95) infinite;
+  mix-blend-mode: screen;
+  border-radius: inherit;
+}
+
+@keyframes afw-pill-sheen {
+  0%   { background-position: 120% 0; }
+  60%  { background-position: -20% 0; }
+  100% { background-position: -20% 0; }
+}
+
+/* Paint the "PRO" label with an emerald-mint gradient when pro is active. */
+.header-usage-pill.is-pro #header-usage-text {
+  background: linear-gradient(135deg, #ffffff 0%, #ddfff0 50%, #a8f0d3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(95, 255, 210, 0.22);
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  position: relative;
+  z-index: 1;
+}
+
+/* The dot already turns green via styles.css; bump its glow to match the halo. */
+.header-usage-pill.is-pro .usage-dot {
+  box-shadow: 0 0 6px rgba(95, 255, 210, 0.85), 0 0 12px rgba(53, 217, 158, 0.5);
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-usage-pill.is-pro,
+  .header-usage-pill.is-pro::after {
+    animation: none !important;
+  }
+}
+
+
+/* ============================================================
+ * Wizard step transitions (forward / back) — added after design-review
+ * feedback that step navigation should feel like a deliberate motion,
+ * not a hard cut. Direction is set as data-anim on the step-view by
+ * renderControlWizard based on the previous-vs-current wizardStep.
+ *
+ * The body is what animates — not the step header — so the Next/Run
+ * button stays anchored at the top while content flows in beneath it.
+ * ============================================================ */
+.afw-step-view { position: relative; }
+.afw-step-body {
+  /* Stabilize body height across step changes so the panel doesn't reflow
+   * between renders — masks the layout shift that caused the "jumps up
+   * a tad" feel after clicking Next. */
+  min-height: 360px;
+}
+
+.afw-step-view[data-anim="forward"] .afw-step-body {
+  animation: afw-step-slide-forward 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.afw-step-view[data-anim="back"] .afw-step-body {
+  animation: afw-step-slide-back 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.afw-step-view[data-anim="init"] .afw-step-body {
+  animation: afw-step-fade-in 220ms ease;
+}
+
+/* Header gets a subtler fade so it doesn't compete with the body slide. */
+.afw-step-view[data-anim="forward"] .afw-step-header,
+.afw-step-view[data-anim="back"] .afw-step-header {
+  animation: afw-step-fade-in 200ms ease;
+}
+
+@keyframes afw-step-slide-forward {
+  from { opacity: 0; transform: translateX(18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes afw-step-slide-back {
+  from { opacity: 0; transform: translateX(-18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes afw-step-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .afw-step-view[data-anim] .afw-step-body,
+  .afw-step-view[data-anim] .afw-step-header {
+    animation: none !important;
+  }
+}
+
+
+/* ============================================================
+ * History jump — sits inside step header (.afw-step-actions),
+ * between Back and Next/Run. Was bottom-mounted before; users said
+ * "put History next to Next" so navigation lives together up top.
+ *
+ * Visual weight intentionally lower than Back/Next (no halo pulse, no
+ * sheen) so the primary nav actions still dominate. Subtle blue accent
+ * matches Back so they read as a navigation cluster.
+ * ============================================================ */
+.afw-step-nav { justify-content: center; }
+.afw-step-nav .afw-step-summary { flex: 1; text-align: center; }
+
+.afw-history-jump,
+.afw-guide-jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 32px;
+  padding: 0 11px 0 9px;
+  border-radius: 8px;
+  border: 1px solid rgba(121, 154, 255, 0.28);
+  background: rgba(8, 14, 34, 0.5);
+  color: var(--afw-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  flex-shrink: 0;
+  transition: color 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+.afw-history-jump:hover,
+.afw-guide-jump:hover {
+  color: var(--afw-text);
+  border-color: rgba(138, 181, 255, 0.45);
+  transform: translateY(-1px);
+}
+.afw-history-jump .material-symbols-outlined,
+.afw-guide-jump .material-symbols-outlined {
+  font-size: 15px;
+  color: var(--afw-accent);
+}
+.afw-history-jump-label,
+.afw-guide-jump-label {
+  font-size: 11px;
+  letter-spacing: 0.2px;
+}
+.afw-history-jump-count {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(125, 168, 255, 0.22);
+  color: var(--afw-accent);
+  margin-left: 2px;
+}
+
+/* =========================================================================
+ * Wizard RTL (Arabic & Urdu) layout corrections
+ * Physical directional properties that need explicit overrides.
+ * ========================================================================= */
+
+/* Status label: small spacer after icon */
+[dir="rtl"] .afw-top .afw-status-label {
+  margin-left: 0;
+  margin-right: 3px;
+}
+
+/* Eyebrow right-aligned counter: push to inline-end in RTL */
+[dir="rtl"] .afw-eyebrow .afw-right {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Paste character counter: push to inline-end in RTL */
+[dir="rtl"] .afw-paste .afw-paste-ct {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* History jump count badge spacer */
+[dir="rtl"] .afw-history-jump-count {
+  margin-left: 0;
+  margin-right: 2px;
+}
+
+/* Big upload button: text alignment follows reading direction */
+[dir="rtl"] .afw-big-upload {
+  text-align: right;
+}
+
+/* CTA option rows: text alignment follows reading direction */
+[dir="rtl"] .afw-cta {
+  text-align: right;
+}
+
+/* Pair-list index column: numeric index aligns to inline-start in RTL */
+[dir="rtl"] .afw-pair-row .afw-idx {
+  text-align: left;
+}
+
+/* Ref strip: check badge (top-left corner) and remove badge (top-right corner)
+ * swap sides so they remain at the correct visual corner in RTL */
+[dir="rtl"] .afw-ref-strip .afw-rt .afw-ref-check {
+  left: auto;
+  right: 3px;
+}
+[dir="rtl"] .afw-ref-strip .afw-rt .afw-temp-badge {
+  left: auto;
+  right: 3px;
+}
+[dir="rtl"] .afw-ref-strip .afw-rt .afw-ref-remove {
+  right: auto;
+  left: 3px;
+}
+
+/* Wizard step nav: summary stays centered, no change needed */
+
+/* Account strip: flex row auto-mirrors; no physical override needed */
+
+/* Wizard header buttons: allow wrapping for longer translated labels */
+[dir="rtl"] .afw-step-btn,
+[dir="rtl"] .afw-action-btn {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* Run error banner — shown on wizard step 3 when state.control.lastRunError
+ * is non-empty. Replaces silent route-bounce-with-logs-tab-only error model.
+ * User reports 2026-05-02_171146Z + 2026-05-02_172605Z showed bouncing to
+ * Control with no on-screen explanation; this surface tells them why. */
+.afw-run-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 8px 0 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  color: #fecaca;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.afw-run-error .material-symbols-outlined {
+  flex: 0 0 auto;
+  font-size: 20px;
+  color: #fca5a5;
+  line-height: 1;
+  margin-top: 1px;
+}
+.afw-run-error-text {
+  flex: 1;
+  word-break: break-word;
+}
+.afw-run-error-dismiss {
+  flex: 0 0 auto;
+  background: transparent;
+  color: #fca5a5;
+  border: none;
+  cursor: pointer;
+  padding: 0 4px;
+  border-radius: 6px;
+  transition: background 120ms ease, color 120ms ease;
+}
+.afw-run-error-dismiss:hover {
+  background: rgba(252, 165, 165, 0.16);
+  color: #fee2e2;
+}
+.afw-run-error-dismiss .material-symbols-outlined {
+  font-size: 18px;
+  color: inherit;
+  margin: 0;
+}
